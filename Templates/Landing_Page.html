@@ -1,0 +1,634 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLCodeverse</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nav-area{
+            width: 80%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:#0787EE;
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); /* Rotate around the Y-axis */
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .profile-btn-text{
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #0787EE;
+            font-size: 14px;
+        }
+        .profile-btn-text:hover{
+            color: black;
+        }
+
+        .profile-btn:hover {
+            transform: rotateY(180deg); 
+        }
+        .body-container{
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .text-section{
+            width: 70%;
+            line-height: 1.5;
+            font-size: 17px;
+            transition: 3s;
+            box-sizing: border-box;
+        }
+        .image-section {
+            width: 30%;
+      
+        }
+   
+        #trophy {
+            animation: spin 8s ease-in-out forwards; 
+            transform-style: preserve-3d; 
+        }
+        
+
+        @keyframes spin {
+            0% {
+                transform: rotateY(0deg); 
+            }
+            50% {
+                transform: rotateY(180deg); /
+            }
+            100% {
+                transform: rotateY(360deg); 
+            }
+        }
+        
+        
+        .image-section img{
+            float: right;
+        }
+        .btn-design{
+            border: none;
+            padding: 10px;
+            font-family: "Poppins";
+            font-style: normal;
+            letter-spacing: 0.5px; 
+            font-weight: 500; 
+            font-size: 17px;
+            color:white;
+            border-radius: 5px;
+            margin-right: 10px;
+           cursor: pointer;
+        }
+        .btn-join{
+            transition: 1s;
+            background-color: #0B85ED;
+        }
+        .btn-join:hover{
+            background-color: #0a518e;
+        }
+
+        .btn-host{
+            transition: 1s;
+            background-color: #FF9F00;
+        }
+        .btn-host:hover{
+            background-color: #d6642b;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .text-design{
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .platform-info-upcoming-contest{
+            width: 80%;
+            margin-left: 10%;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0; 
+                transform: translateX(-100px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        .platform-info{
+            width: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .platform-info-details{
+            width: 50%;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            text-align: center;
+            margin-bottom: 20px;
+         
+
+        }
+        .upcoming-contest{
+            width: 50%;
+            margin-top: 20px;
+          
+
+        }
+        .contest-info-details{
+            background-color: #F8FAFC;
+            width: 350px;
+            padding: 10px;
+        }
+        .contest-title{
+            transition: 1s;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #1184E3;
+            border: none;
+            padding: 10px;
+            background: none;
+        }
+        .contest-title:hover{
+            color: rgb(1, 52, 73);
+            text-decoration: underline;
+        }
+        .contest-date-time{
+            width: 100%;
+            display: flex;
+            flex-wrap: flex;
+            margin-left: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .contest-date  .contest-time{
+            width: 40%;
+            margin-bottom: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #3598DC;
+        }
+        .get-access{
+            width: 100%;
+          
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #1184E3;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+    
+        .get-access-content{
+            border-radius: 10px;
+            width: 80%;
+          
+            margin-left: 10%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .get-access-content-head{
+            width: 100%;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: White;
+            text-align: center;
+
+        }
+        .get-access-form{
+            width: 40%;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14px;
+            margin-top: 10px;
+            
+        }
+        .get-access-form-design{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        .input-design-access{
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid gray;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 13px;
+        }
+
+        .submit-btn{
+            width: 100%;
+            padding: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+            background-color: #FF9F00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+
+        }
+        .org-overview{
+            width: 60%;
+            
+        }
+        .benefit-org{
+            width: 30%;
+            margin-left: 30px;
+        }
+        .benefit-elements{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: white;
+            font-size: 14px;
+            padding-bottom: 15px;
+            transition: all 0.5s ease-in;
+
+        }
+        .benefit-elements:hover{
+            transform: translate(20px);
+        }
+        #overview{
+            animation: fade 2s ease-in-out;
+            width: 100%;
+       
+        }
+        @keyframes fade {
+            0% {
+                opacity: 0; 
+            }
+ 
+            100% {
+                opacity: 1; 
+            }
+        }
+        .organizational-access-request{
+            width: 50%;
+            margin-left: 25%;
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <button class="nav-elements">Contest</button>
+                <button class="nav-elements">Practice</button>
+                <button class="nav-elements">Leaderboard</button>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="search" placeholder="Contest Id">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+              {% if sessionId == '' %}
+                <form action="{% url 'authentication' %}" method="POST">
+                    {% csrf_token %}
+                   <input type="hidden" name="role" value="all">
+                  <button type="submit" class="profile-btn-text">Login</button>
+                </form>
+              {% else %}
+                <form action="{% url 'profile' %}">
+
+                    {% if profilePic == '' %}
+                      <button class="profile-btn"> <img src="{% static 'profile.png'%}" height="40px" width="40px"></button>
+                    {% else %}
+                      <button class="profile-btn"><img src="data:image/png;base64,{{ profilePic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% endif %}  
+                  
+                    
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              {% endif %}
+              
+            </div>
+           
+            </div>    
+        </div>
+        <div class="border-design"></div>
+        <div class="body-container">
+            <div class="text-section">
+                <h3>The Place For Test Your <span style="color: #0B85ED">Inteligence And ML Skills</span>.</h3>
+                <p id="site-potential">
+                  
+                </p>
+                {% if sessionId == '' %}
+                <div style="display: flex">
+                    <form action="{% url 'authentication' %}">
+                        <button class="btn-design btn-join" type="submit">Join</button>
+                    </form>
+                
+                    <form action="{% url 'authentication' %}">
+                      <button class="btn-design btn-host" type="submit">Host Contest</button>
+                    </form>
+                </div>
+                {% else %}
+                <div style="display: flex">
+                    <form action="{% url 'profile' %}">
+                        <button class="btn-design btn-join" type="submit">Join</button>
+                    </form>
+                  {% if role == 'Organizer' %}
+                    <form action="{% url 'oraganizational_dashboard' %}">
+                      <button class="btn-design btn-host" type="submit">Host Contest</button>
+                    </form>
+                   {% else %}
+                    <form >
+                        <button class="btn-design btn-host">Host Contest <span style="font-size: 12px">(No Access)</span></button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="image-section">
+                <img src="{% static 'award.png '%}" id="trophy" height="220px" width="220px">
+            </div>
+        </div>
+        <div class="border-design"></div>
+        <h2 class="text-design" style="margin-top: 50px;   text-align: center;"><span style="color: #FF9F00;">Sharpen Your Skills,</span> Compete for Victory</h2>
+        <div class="platform-info-upcoming-contest">
+            <div class="platform-info">
+                <div class="platform-info-details">
+                    <h4 class="text-design">{{number_of_contests}}+</h4>
+                    <p class="text-design">Contests</p>
+                </div>
+                <div class="platform-info-details">
+                    <h4 class="text-design">{{number_of_contestants}}+</h4>
+                    <p class="text-design">Contestants</p>
+                </div>
+                <div class="platform-info-details">
+                    <h4 class="text-design">{{number_of_submissions}}+</h4>
+                    <p class="text-design">Submission Since 2024</p>
+                </div>
+                <div class="platform-info-details">
+                    <h4 class="text-design">{{number_of_accepted}}+</h4>
+                    <p class="text-design">Accepted Solutions</p>
+                </div>
+            </div>
+            <div class="upcoming-contest">
+                <h4 class="text-design">upcoming Contests</h4>
+                <div class="contest-info-details">
+                    {% for contest in contests %}
+                <form action="{% url 'ml_contest_registration' %}" method="GET">
+                    <input type="hidden" name="contestId" value={{contest.id}}>
+                    <button class="contest-title">{{contest.title}}</button>
+                   
+                </form>
+                <div class="contest-date-time">
+                    <div class="contest-time"><img height="12px" width="12px" src="{% static 'date.png' %}"> {{contest.date}}</div>
+                    <div class="contest-date" style="margin-left: 10px;"><img height="12px" width="12px" src="{% static 'clock.png' %}">&nbsp;{{contest.time}}</div>
+                </div>
+                <div class="border-design"></div>
+                {% endfor %}
+            </div>
+          
+        </div>
+        </div><br><br>
+        
+        <div class="get-access">
+         <div class="get-access-content">
+            <h2 class="get-access-content-head">Host <span style="color: #FF9F00;"> Contest</span></h2>   
+                <div class="org-overview">
+                    <img src="{% static '1st.png' %}" id="overview" style="border-radius: 10px">
+                </div>
+                <div class="benefit-org">
+                    <div class="benefit-elements"><img src="{% static 'custom.png' %}" height="16px" width="16px"><div>Custom Contest Formats</div></div>
+                    <div class="benefit-elements"><img src="{% static 'send.png' %}" height="16px" width="16px"><div>Share Contest Registration Forms</div></div>
+                    <div class="benefit-elements"><img src="{% static 'key.png' %}" height="16px" width="16px"><div>Approved Only or Open For All</div></div>
+                    <div class="benefit-elements"><img src="{% static 'networking.png' %}" height="16px" width="16px"><div>Organization or University Restrictions</div></div>
+                    <div class="benefit-elements"><img src="{% static 'notice.png' %}" height="16px" width="16px"><div>Manage Notifications and Clarifications</div></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script>
+        var site_potential = document.getElementById("site-potential")
+        var site_info_head = document.querySelector(".text-design");
+        var str="Compete with the best, solve real-world AI problems, and transform your ideas into impactful solutions. This is where innovation meets competition—where your code can truly change the world."+
+            "Push your limits, learn from every challenge, and become part of a community of forward-thinkers shaping the future of artificial intelligence.";
+        var text = '';
+        for (var i = 0; i < str.length; i++) {
+          
+            setTimeout(myFunction, 10*i,i);
+        }
+        
+        function myFunction(i) {
+            text = text +  str.charAt(i);
+            site_potential.innerHTML = text;
+        }
+        const overviewId = document.getElementById("overview");
+        const arrayImg = ["{% static '2nd.png' %}","{% static '3rd.png' %}","{% static '4th.png' %}","{% static '5th.png' %}","{% static '6th.png' %}","{% static '7th.png' %}","{% static '8th.png' %}","{% static '9th.png' %}","{% static '1st.png' %}"];
+        const len = arrayImg.length;
+        var index=0;
+        console.log(len);
+        function changeOverview() {
+            overviewId.src = arrayImg[index];
+            console.log(index);
+            if(len-1 > index){
+                index = index + 1;
+            }
+            else{
+                index=0;
+            }
+            overviewId.style.animation = "none";
+            void overviewId.offsetWidth;        
+            overviewId.style.animation = "fade 1s ease-in-out"; 
+          }
+          
+
+        setInterval(changeOverview, 3000);
+      </script>
+</body>
+</html>

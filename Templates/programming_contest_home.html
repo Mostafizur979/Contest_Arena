@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLCodeverse - Programming Contest Home Page</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nav-area{
+            width: 80%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:#0787EE;
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); 
+            
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: 80%;
+            margin: 0 auto;
+         
+            margin-bottom: 50px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 10px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+        }
+        .banner{
+            width: 100%;
+            animation: fadeLeftRight 1s ease-in-out;
+
+        }
+        @keyframes fadeLeftRight {
+            0% {
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        .banner-design{
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+        }
+        .contest-info{
+            width: 90%;
+            height: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 10px;
+            transition: margin-top 0.4s ease-in-out;
+            animation: fadeRightLeft 1s ease-in-out;
+
+        }
+        @keyframes fadeRightLeft {
+            0% {
+                opacity: 0; 
+                transform: translateX(50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .contest-details{
+            width: calc(60% - 10px);
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+
+        }
+        .problem-list{
+            width: 40%;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+            
+        }
+        .text-design{
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-size: 14px;
+            
+        }
+
+        .border{
+            width: 100%;
+            background-color: rgb(238, 228, 228);
+            height: 1px;
+        }
+        .problem-title{
+            width: 100%;
+            border-bottom: 1px solid rgb(214, 203, 203);
+            
+        }
+        .problem-btn{
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: none;
+            color: rgb(22, 160, 215);
+            text-align: left;
+            font-size: 16px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+        }
+        .problem-btn:hover{
+            color: #2f353b;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <form action="{% url 'programming_contest_home' %}" method="GET">
+                 
+                    <input type="hidden" name="contestId" value={{contestId}}>
+                    <button class="nav-elements active-link">Contest</button>
+                </form>
+ 
+                <form action="{% url 'programming_leaderboard' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="contestId" value={{contestId}}>
+                    <button class="nav-elements">Leaderboard</button>
+                </form>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="search" placeholder="Contest Id">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+            
+                <form action="{% url 'profile' %}">
+                    {%if pic is not none%}
+                    <button class="profile-btn"> <img src="data:image/png;base64,{{ pic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% else %}
+                    <button class="profile-btn"> <img src="{% static 'profile.png' %}" height="40px" width="40px"  ></button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              
+              
+            </div>
+           
+            </div>    
+        </div>
+        <div class="border-design"></div>
+     
+        {% if cid == '1' %}
+        {% else %}
+        <div class="body-container">
+        <div class="banner">
+            <img class="banner-design" src="data:image/png;base64,{{ image }}">
+          
+        </div>
+        <div class="contest-info">
+            <div class="contest-details">
+              <div class="text-design"  style="font-size: 24px; font-weight: 400">{{title}}</div><br>
+              <div class="text-design">By Daffodil International University - Dept. Of CSE</div><br><br>
+
+              <div class="text-design"  style="font-size: 21px; font-weight: 400">Schedule</div><br>
+              <div class="text-design">The Contest Started on <b>{{contestDate}}</b> at <b>{{contestTime}}</b></div><br><br>
+
+              <div class="text-design"  style="font-size: 21px; font-weight: 400">Rules</div>
+              <pre class="text-design">{{rules}}</pre>
+            </div>
+            <div class="problem-list">
+                <h2 class="text-design" style="font-size: 17px">Problems</h2>
+                <div class="border"></div>
+             
+     
+                {% for problem in problems%}
+                <div class="problems-title">
+                    <form action="{% url 'contestProblems' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="problemId" value={{problem.id}}>
+                        <input type="hidden" name="contest-id" value={{contestId}}>
+                      
+                        <button class="problem-btn">{{problem.serial}}. {{problem.title}}</button>
+                    </form>
+                </div>
+                <div class="border"></div>
+                {% endfor%}
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+   <script>
+      const contestInfo = document.querySelectorAll(".contest-info");
+      const banner = document.querySelectorAll(".banner-design");
+
+      banner[0].addEventListener("mouseout",()=>{
+           contestInfo[0].style.marginTop = "-90px";
+      });
+      banner[0].addEventListener("mouseover", ()=>{
+          contestInfo[0].style.marginTop = "0px";
+      });
+   </script>
+  </div>
+
+</body>
+</html>

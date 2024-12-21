@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Judge - Programming Contest Registration Form</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+        }
+        .Container{
+            width: 100%;
+            background-color: #C9E6F0;
+            padding: 20px;
+            box-sizing: border-box;
+            
+          }
+        
+          .input-design {
+              float: right;
+              font-size: 15px;
+              padding: 10px;
+              outline: none; 
+              border: none;
+              width: 200px;
+              transition: 1s;
+          }
+      
+          .input-design:focus {
+              border-color: dodgerblue; 
+              box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+              width: 360px;
+          }
+          .profile-btn{
+              border-radius: 50%;
+              height: 50px;
+              width: 50px;
+              padding: 0px;
+              background: none;
+              border: none;
+              transition: transform 0.6s ease-in-out;
+              transform-style: preserve-3d; 
+          }
+          .profile-btn:hover {
+              transform: rotateY(180deg); /* Rotate around the Y-axis */
+          }
+          .border-design{
+              width: 100%;
+              height: 1px;
+              background-color: rgb(214, 203, 203);
+          }
+          .body-container{
+              width: 60%;
+              margin: 0 auto;
+              
+              font-size: .875rem;;
+              font-family: "Poppins";
+              font-weight: 400;
+              font-style: normal;
+              color: #2f353b;
+              display: flex;
+              flex-wrap: wrap;
+              letter-spacing: 0.5px; 
+              font-weight: 500;
+              padding: 20px;
+              box-sizing: border-box;
+              background-color: white;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+              border-radius: 10px;
+              
+          }
+        .banner{
+            width: 100%;
+
+        }
+        .banner-design{
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+        }
+        .title-bar{
+            background: transparent;
+            backdrop-filter: blur(5px);
+            border: 1px solid white;
+            position: relative;
+            top: -200px;
+            width: 60%;
+            font-size: 27px;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 20px;
+            margin: 0 auto;
+        }
+        .heading{
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+        }
+        .contents{
+            width: 100%;
+            background-color: white;
+            box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
+           
+            border-left: 6px solid skyblue;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            
+        }
+        .contents-border{
+            max-width: 100%;
+            height: 3px;
+            background-color: brown;
+           
+        }
+        .contents-body{
+            margin-top: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+        }
+        
+
+        .user-forms{
+            width: 100%;
+          
+            
+        }
+        .forms-body, .forms-radio{
+            margin-top: 10px;
+            max-width: 100%;
+            padding: 30px;
+            box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, .25);
+           
+            background-color: white;
+            border-radius: 10px;
+        }
+        .input-field{
+            width: 100%;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid skyblue;
+            padding: 10px 10px 10px 0px;
+            margin-top: 10px;
+        }
+        .submit-btn, .reset-btn{
+            padding: 15px;
+            background-color: skyblue;
+            border-radius: 5px;
+            border: none;
+            margin: 20px 20px 20px 0px;
+            font-size: 15px;
+            color: white;
+        }
+
+        .reset-btn{
+            background-color: rgb(248, 134, 134);
+        }
+
+       
+        
+    </style>
+</head>
+<body>
+    <div class="Container">
+      
+        <div class="body-container">
+           <div class="banner">
+            <img class="banner-design" src="data:image/png;base64,{{ image }}">
+            <div class="title-bar">{{title}}</div>
+        </div>
+
+        <div class="contents">
+            <div class="heading"><h2 style="font-size: 32px;">Contest Details</h2></div>
+            <div class="contents-border"></div>
+            <div class="contents-body">{{about_contest}}
+            <br><br>
+            <div><b>Contest Fee: {{fee}} BDT</b></div>   
+            <div><b>Last Date of Registration: {{registrationDate}} </b></div>
+            <div><b>Contest Date: {{contestDate}} </b></div>
+            <div><b>Payments Guideline: Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum error similique adipisci ipsum temporibus quasi corrupti officia optio ut.</b></div>
+            </div>
+        </div>
+
+           
+        <form class="user-forms" action="{% url 'programming_contest_registration_successfull' %}" method="POST">
+            {% csrf_token %}
+            <div class="forms-body">
+                <div>Number of Team Member</div>
+                <select id="teamType" name="teamType" class="input-field" id="team-type">
+                    <option value="1">Solo Team</option>
+                    <option value="2">2 Memebers</option>
+                    <option value="3">3 Members</option>
+                </select>
+            </div>
+
+            
+            <div class="forms-body">
+                <div>Team Name</div>
+                <input type="text" name="teamName" class="input-field" required placeholder="Your Name">
+                <input type="hidden" name="contestId" class="input-field"  value={{contest_id}}>
+            </div>
+    
+            <div class="forms-body">
+                <div class="name">First Team Member Name</div>
+                <input type="text" name="name1" class="input-field" required placeholder="Your Name">
+            </div>
+    
+            <div class="forms-body">
+                <div class="email">First Team Member Email</div>
+                <input type="email" name="email1" class="input-field" required placeholder="Your MLCodeverse Email">
+            </div>
+            <div class="forms-body">
+                <div class="mobile">First Team Member Mobile No.</div>
+                <input type="text" name="mobile1" class="input-field" required placeholder="Your Mobile Number">
+            </div>
+
+            <div class="forms-body">
+                <div>Second Team Member Name</div>
+                <input type="text" name="name2" class="input-field"  placeholder="Second Team Member Name">
+            </div>
+    
+            <div class="forms-body">
+                <div>Second Team Member Email</div>
+                <input type="email" name="email2" class="input-field" placeholder="Second Team Member MLCodeverse Email">
+            </div>
+            <div class="forms-body">
+                <div>Second Team Member Mobile No.</div>
+                <input type="text" name="mobile2" class="input-field"  placeholder="Second Team Member Mobile Number">
+            </div>
+    
+            <div class="forms-body">
+                <div>Third Team Member Name</div>
+                <input type="text" name="name3" class="input-field"  placeholder="Third Team Member Name">
+            </div>
+    
+            <div class="forms-body">
+                <div>Third Team Member Email</div>
+                <input type="email" name="email3" class="input-field"  placeholder="Third Team Member MLCodeverse Email">
+            </div>
+            <div class="forms-body">
+                <div>Third Team Member Mobile No.</div>
+                <input type="text" name="mobile3" class="input-field" placeholder="Third Team Member Mobile Number">
+            </div>
+    
+            <div class="forms-radio">
+                <div style="padding-bottom: 20px">Payment Type</div>
+                <input type="radio" name="payment" value="bKash"> bKash
+                <input type="radio" name="payment" value="Nagad"> Nagad
+                <input type="radio" name="payment" value="Rocket"> Rocket
+            </div>
+
+            <div class="forms-body">
+                <div>Transaction No.</div>
+                <input type="text" name="transaction" class="input-field" required placeholder="bkash/Nagad/Rocket Transaction Number">
+            </div>
+
+            <div class="forms-body">
+                <div>Mobile Payment Number (e.g., bKash, Rocket, Nagad)</div>
+                <input type="text" name="paymentNumber" class="input-field" required placeholder="bkash/Nagad/Rocket Transaction Number">
+            </div>
+     
+         
+            <div><button type="submit" class="submit-btn">Submit</button><button type="reset" class="reset-btn">Reset</button></div>
+          </form>
+
+
+    </div>
+
+    <script>
+        const formBody = document.querySelectorAll(".forms-body");
+        const teamType = document.getElementById("teamType");
+        const inputField = document.querySelectorAll(".input-field");
+        for(var i=5;i<formBody.length-2;i++){
+            formBody[i].style.display="none";
+            inputField[i].removeAttribute("required");
+            document.querySelector('.name').textContent = "Name";
+            document.querySelector('.email').textContent = "Email";
+            document.querySelector('.mobile').textContent = "Mobile";
+        }
+        
+        teamType.addEventListener("change",(event)=>{
+            console.log(event.target.value);
+
+            for(var i=5;i<=2+event.target.value*3;i++){
+                formBody[i].style.display="block";
+                inputField[i].setAttribute("required", "true");
+                document.querySelector('.name').textContent = "First Team Member Name";
+                document.querySelector('.email').textContent = "First Team Member Email";
+                document.querySelector('.mobile').textContent = "First Team Member Mobile";
+            }
+            for(var i=formBody.length-3 ; i>event.target.value*3 + 1; i--){
+                inputField[i].removeAttribute("required");
+                formBody[i].style.display="none";
+                
+            }
+
+            if(event.target.value==1){
+                document.querySelector('.name').textContent = "Name";
+                document.querySelector('.email').textContent = "Email";
+                document.querySelector('.mobile').textContent = "Mobile";
+            }
+            
+        });
+    </script>
+
+</body>
+</html>

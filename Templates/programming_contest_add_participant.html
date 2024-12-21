@@ -1,0 +1,768 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Programming Contest Team</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+   
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: flex-start;
+     
+          
+        }
+        #navbar{
+            width: 100%;
+            height: 70px;
+            background-color: #FFFF;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            animation: rightToLeft 1s ease-in-out;
+        }
+        @keyframes rightToLeft{
+            0%{
+                opacity: 0; 
+                transform: translateY(-100px); 
+            }
+            100%{
+                opacity: 1; 
+                transform: translateY(0px); 
+            }
+        }
+
+
+        #nav-area{
+            width: 100%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: "Poppins";
+            font-weight: 600;
+            font-style: normal;
+            font-size: 20px;
+            gap: 5px;
+        }
+
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:#0787EE;
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: -70px;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: 1px solid #0787EE;
+            width: 220px;
+            border-radius: 5px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); /* Rotate around the Y-axis */
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: calc(100% - 330px);
+            margin: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;  
+        }
+        .body-content{
+            width: 100%;
+           
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+      .org-logo{
+          width: 200px;
+          margin: 0 auto;
+          padding-top: 10px;
+      }
+      .side-bar{
+        width: 300px;
+        height: 100vh;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: center;
+         background-color: white;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         border-radius: 5px;
+         margin: 10px 0px 10px 10px;
+         box-sizing: border-box;
+         position: sticky;
+         top: 10px;
+         animation: fadeInUp 1s ease-in-out;
+       }
+       @keyframes fadeInUp {
+        0% {
+            opacity: 0; 
+            transform: translateY(50px); 
+        }
+        100% {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+
+       .org-logo{
+           width: 200px;
+           margin: 0 auto;
+           padding-top: 25px;
+         
+       }
+       .links, .sub-links{
+           border: none;
+           width: 290px;
+           background: none;
+           display: flex;
+           justify-content: flex-start;
+           align-items: center;
+           gap: 5px;
+           margin: 0px 0px 0px 10px;
+           font-size: 16px;
+           font-family: "Poppins";
+           font-weight: 500;
+           font-style: normal;
+           color: #2f353b;
+           padding: 10px 0px 10px 10px;
+           cursor: pointer;
+           box-sizing: border-box;
+     
+ 
+       }
+       .border-menu{
+         width: 270px;
+         height: 1px;
+         background-color: rgb(214, 203, 203);
+        }
+        .sub-links {
+        padding-left: 20px;
+        display: none; 
+    
+        }
+    
+       .links:hover, .sub-links:hover{
+           color:  #3598DC;
+           border-top: 1px solid #3598DC;
+           border-bottom: 1px solid #3598DC;
+        }
+        .arrow-1st{
+         width: 24px;
+         position: relative;
+         right: -80px;
+         top: 5px;
+        }
+        .arrow-2nd{
+         width: 24px;
+         position: relative;
+         right: -12px;
+         top: 5px;
+        }
+        .contest-list{
+            width: 100%;
+        }
+        table {
+
+            width: 100%;
+            border-collapse: collapse;
+ 
+        }
+        
+        th, td {
+            padding: 15px;
+            padding-left: 20px;
+            text-align: center;
+            font-size: 15px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            
+           
+        }
+        thead {
+          background-color: #f5f5f5; 
+          position: sticky; 
+          top: 0; 
+          z-index: 10;
+        }
+        
+        th {
+            background-color: #3598DC;
+            color: white;
+           
+        }
+    
+        tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+        tr:hover {
+            background-color: rgb(213, 233, 241);
+            color: black;
+            margin: 10px;
+        }
+        .directory{
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14.4px;
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+            font-weight: 600;
+        }
+        #prev-btn,#next-btn{
+            border: none; padding: 10px; background: #3598DC; 
+            border: 1px solid #3598DC;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+        #next-btn:hover{
+            background-color: white;
+            color: #3598DC;
+           
+        }
+        #prev-btn:hover{
+            background-color: white;
+            color: #3598DC;
+        }
+        .pending-class{
+            background-color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+            padding: 5px;
+            width: 100px;
+            margin: 0 auto;
+            color: white;
+        }
+        .action{
+            position: absolute;
+            top: 300px;
+            right: 8%;
+            width: 200px;
+            background-color: #F8FAFC;;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            display: none;
+        }
+        .action-elements:hover{
+            background-color: rgb(156, 164, 167);
+            border-radius: 20px;
+        }
+        .action-elements-text{
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+            padding: 10px;
+            position: relative;
+            top: -3px;
+            
+        }
+        .action-elements-button{
+            border: none;
+            background-color: transparent;
+            padding: 10px;
+        }
+        .copy-link-data-show{
+            position: absolute;
+            width: 500px;
+            background: white;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-shadow: 1px 1px 1px 1px gray;
+            padding: 10px;
+            top: 200px;
+            left: 30%;
+            display: flex;
+            flex-wrap: wrap;
+            display: none;
+        }
+        .link{
+            width: 80%;
+            border: 1px solid gray;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 15px;
+            color: black;
+            
+        }
+    
+        .cancel-btn{
+            width: 500px;
+
+
+        }
+        .cancel-btn-icon{
+            float: right;
+        }
+
+        .contest-heading{
+            width: 100%;
+            font-size: 16px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            padding-bottom: 20px;
+        }
+        .member-info{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .member-img{
+            width: 40%;
+
+        }
+        .member-details{
+            width: 60%;
+            
+        }
+        .profile-text{
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            line-height: 1.4;
+            gap: 5px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 24px;
+          }
+          #active{
+            font-weight: 600;
+            color: #78B3CE;
+            border-radius: 5px;
+        }
+        .directory-link{
+            color: black;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 15px;
+            font-weight: 400;
+          
+        }
+
+     
+
+    </style>
+</head>
+<body>
+
+    <div class="Container">
+       
+        <div class="side-bar">
+            <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+            <div class="border-menu"></div><br>
+            <form action="{% url 'oraganizational_dashboard' %}">
+              <button class="links"><img src="{% static 'org-dash.png' %}" height="18px" width="18px"><div>Dashboard</div></button>
+            </form>
+           
+            <div class="links"><img src="{% static 'ai.png' %}" height="18px" width="18px"><div>Machine Learning</div><div class="arrow-1st"><img src="{% static 'right.png' %}"  class="arrow"height="18px" width="18px"></div></div>
+            <form action="{% url 'Host_Contest' %}">
+              <button class="sub-links"><img src="{% static 'add.png' %}" height="18px" width="18px"><div>Create Contest</div></button>
+            </form>
+            <form action="{% url 'host_contest_list' %}">
+              <button class="sub-links"><img src="{% static 'list.png' %}" height="18px" width="18px"><div>Contest List</div></button>
+            </form>
+            <div class="links"><img src="{% static 'coding.png' %}" height="18px" width="18px"><div>Compettive Programming</div><div class="arrow-2nd"><img  src="{% static 'right.png' %}"  class="arrow" height="18px" width="18px"></div></div>
+            <form action="{% url 'Host_Programming_Contest' %}">
+              <button class="sub-links"><img src="{% static 'add.png' %}" height="18px" width="18px"><div>Create Contest</div></button>
+            </form>
+            <form action="{% url 'Programming_Contest_List' %}">
+              <button class="sub-links"><img src="{% static 'list.png' %}" height="18px" width="18px"><div>Contest List</div></button>
+            </form>
+          
+            <button class="links"><img src="{% static 'logout.png' %}" height="18px" width="18px"><div>Logout</div></button>
+
+            </div>
+            <script>
+               const links = document.querySelectorAll(".links");
+               const subLink = document.querySelectorAll(".sub-links");
+               const arrowClass= document.querySelectorAll(".arrow");
+               var counter1 = 0;
+               var counter2 = 0;
+               links.forEach((data,index)=>{
+                  data.addEventListener("click",()=>{
+            
+                   if(index==1 && counter1==0){
+                    subLink[0].style.display = "flex";
+                    subLink[1].style.display = "flex";
+             
+                    counter1 = 1;
+                    arrowClass[0].src="{% static 'down.png' %}";
+                   }
+                   else if(counter1==1 && index != 2){
+                    subLink[0].style.display = "none";
+                    subLink[1].style.display = "none";
+                    counter1=0;
+                    arrowClass[0].src="{% static 'right.png' %}";
+                   }
+                   if(index==2 && counter2==0){
+                    subLink[2].style.display = "flex";
+                    subLink[3].style.display = "flex";
+                    counter2 = 1;
+                    arrowClass[1].src="{% static 'down.png' %}";
+                   }
+                   else if(counter2==1 && index != 1){
+                    subLink[2].style.display = "none";
+                    subLink[3].style.display = "none";
+                    counter2 = 0;
+                    arrowClass[1].src="{% static 'right.png' %}";
+                   }
+
+                  });
+               });
+            </script>
+        <div class="body-container">
+            <div id="navbar">
+
+                <div id="nav-area">
+                    <button class="nav-elements"><img src="{% static 'approved.png' %}" height="22px" width="22px">&nbsp;Participants Request Confirmation</button>
+                <div class="search-section">
+                    <form style="display: flex">
+                        <input class="input-design" type="text" id="contest-id" placeholder="Search By Phone Number">
+                        <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                    </form>
+                
+                    <form action="{% url 'profile' %}">
+                    
+                        <button class="profile-btn"> <img src="{% static 'profile.png'%}" height="40px" width="40px"  ></button>
+                        
+                    </form>
+                  
+                </div>
+               
+                </div>    
+            </div>
+            <div class="body-content">
+            <div class="contest-heading">
+                <h2> {{title}}</h2>
+                <p>Contest Fee: <strong>{{fee}}</strong></p>
+          
+            </div>
+            <div class="contest-list">
+                <table>
+           
+                        <tr>
+                            <th>#</th>
+                            <th>Team Name</th>
+                            <th>Registration Date-Time</th>
+                            <th>Payment Type</th>
+                            <th>Account Number</th>
+                            <th>Transaction</th>
+                            <th>Request Status</th>
+                            <th>Action</th>
+                        </tr>
+
+  
+                    {% for team in teams %}
+            
+                   <tr class="contest-data">
+                    <td>{{team.serial}}</td>
+                    <td style="width: 200px">{{team.teamName}}</td>
+                    <td>{{team.rDateTime}}</td>
+                    <td>{{team.paymentType}}</td>
+                    <td>{{team.accountNumber}}</td>
+                    <td>{{team.transaction}}</td>
+                   
+                    {% if team.status == 'Pending' %}
+                    <td><div class="pending-class">{{team.status}}</div></td>
+                    {% else %}
+                    <td><div class="pending-class" style="background-color: #28A745; border: 1px solid #28A745">{{team.status}}</div></td>
+                    {% endif %}
+                    <td><img src="{% static 'dots.png' %}" class="contest-action"></td>
+                    <div class="action">
+             
+                    {% if team.status == 'Pending' %}
+                       <div class="action-elements">
+                        <form action="{% url 'programming_contest_registration_approved' %}" method="post">
+                            {% csrf_token %}
+                        <input type="hidden" name="contestId" value={{team.id}}>
+                        <input type="hidden" name="email" value={{team.email1}}>
+                        <input type="hidden" name="name" value={{team.name1}}>
+                        <button class="action-elements-button"><img height="20px" width="20px"src="{% static 'approved.png'%}"><span class="action-elements-text">Approved</span></button>
+                       </form></div>
+                    {% else %}
+                    <div class="action-elements">
+                        <form action="{% url 'programming_contest_registration_approved' %}" method="post">
+                            {% csrf_token %}
+                        <input type="hidden" name="contestId" value={{team.id}}>
+                        <input type="hidden" name="email" value={{team.email1}}>
+                        <input type="hidden" name="name" value={{team.name1}}>
+                        <button class="action-elements-button"><img height="20px" width="20px"src="{% static 'remove-access.png'%}"><span class="action-elements-text">Remove Access</span></button>
+                       </form></div>
+                    {% endif %}
+                       <div class="action-elements copy-link"><button  class="action-elements-button "><img height="20px" width="20px"src="{% static 'see-team.png'%}"><span class="action-elements-text">See Team Info</span></button></div>
+                     
+
+                       <p style="display: none" class="copy-link-data">{{contest.id}}</p>
+   
+                   </tr>
+                   <div class="copy-link-data-show">
+                    <div class="cancel-btn"><img class="cancel-btn-icon" height="24px" width="24px" src="{% static 'cancel.png' %}" alt="Cancel"></div><br><br>
+                    
+                    <div class="member-info">
+                        <div class="member-img">
+                            <img src="data:image/png;base64,{{ team.img1 }}" height="150px" width="150px" style="border-radius: 50%">
+                        </div>
+                        <div class="member-details">
+                            <div class="profile-text"><img src="{% static 'name.png' %}"><div>{{team.name1}}</div></div>
+                            <div class="profile-text"><img src="{% static 'email.png' %}"><div>{{team.email1}}</div></div>
+                            <div class="profile-text"><img src="{% static 'telephone.png' %}"><div>{{team.mobile1}}</div></div>
+                        </div>
+                    </div>
+                    
+                    {% if team.email2 != '' %}
+                    <div class="member-info">
+                        <div class="member-img">
+                            <img src="data:image/png;base64,{{ team.img2 }}" height="150px" width="150px" style="border-radius: 50%">
+                        </div>
+                        <div class="member-details">
+                            <div class="profile-text"><img src="{% static 'name.png' %}"><div>{{team.name2}}</div></div>
+                            <div class="profile-text"><img src="{% static 'email.png' %}"><div>{{team.email2}}</div></div>
+                            <div class="profile-text"><img src="{% static 'telephone.png' %}"><div>{{team.mobile2}}</div></div>
+                        </div>
+                    </div>
+                   {%endif%}
+
+                                       
+                   {% if team.email3 != '' %}
+                   <div class="member-info">
+                       <div class="member-img">
+                           <img src="data:image/png;base64,{{ team.img3 }}" height="150px" width="150px" style="border-radius: 50%">
+                       </div>
+                       <div class="member-details">
+                           <div class="profile-text"><img src="{% static 'name.png' %}"><div>{{team.name3}}</div></div>
+                           <div class="profile-text"><img src="{% static 'email.png' %}"><div>{{team.email3}}</div></div>
+                           <div class="profile-text"><img src="{% static 'telephone.png' %}"><div>{{team.mobile3}}</div></div>
+                       </div>
+                   </div>
+                  {%endif%}
+                </div>
+                   {% endfor %}
+      
+                </table>
+                <button id="prev-btn" onclick="prevFunction()"><< previous</button>
+                <button id="next-btn" onclick="nextFunction()" style="float: right">Next >></button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        const contestData = document.querySelectorAll(".contest-data");
+        const teamId = document.getElementById("contest-id");
+        
+        let search = '';
+        teamId.addEventListener("keyup",function(e){
+            search=teamId.value;
+            console.log(search);
+           
+            if(search.length==0){
+                contestData.forEach((data,i)=>{
+                    data.style.display="table-row";
+                });
+            }
+            contestData.forEach((data,i)=>{
+                data.style.display="none";
+            });
+            contestData.forEach((data,i)=>{
+                if(data.children[1].textContent.includes(search) || data.children[4].textContent.includes(search)){
+                  console.log(data.children[1].textContent);
+                  data.style.display="table-row";
+                };
+            });
+          
+        });
+       
+    </script>
+    <script>
+        var contest = document.querySelectorAll(".contest-data");
+        var len = contest.length;
+        var index = 0;
+        const copyLink = document.querySelectorAll(".copy-link");
+        const copyLinkData = document.querySelectorAll(".copy-link-data");
+        const cancelBtn = document.querySelectorAll(".cancel-btn-icon");
+        const copyLinkDataShow = document.querySelectorAll(".copy-link-data-show");
+     
+       
+
+        copyLink.forEach((data,index)=>{
+            data.addEventListener("click", ()=>{
+              copyLinkDataShow[index].style.display="block";
+             
+            });
+        });
+
+        cancelBtn.forEach((data,index)=>{
+          data.addEventListener("click", ()=>{
+            copyLinkDataShow[index].style.display="none";
+           
+          });
+        });
+        
+
+        function showRows(startIndex) {
+         
+            for (var i = 0; i < len; i++) {
+                contest[i].style.display = "none";
+            }
+        
+
+            for (var i = startIndex; i < startIndex + 5 && i < len; i++) {
+                contest[i].style.display = "table-row";
+            }
+        
+        }
+      
+        showRows(index);
+        
+       function prevFunction() {
+            if (index >= 5) {
+                index -= 5;
+                showRows(index);
+            }
+        };
+        
+        function nextFunction() {
+            if (index + 5 < len) {
+                index += 5;
+                showRows(index);
+            }
+        };
+
+        var contestAction = document.querySelectorAll(".contest-action");
+        var action = document.querySelectorAll(".action");
+        contestAction.forEach((data,index)=>{
+            data.addEventListener("click", ()=>{
+                action.forEach((act, i) => {
+                    if (i !== index) {
+                        act.style.display = "none";
+                    }
+                });
+                  const rect = data.getBoundingClientRect();
+                  const y = rect.top + window.scrollY; 
+                  action[index].style.display = "block";
+                  action[index].style.top = y-5+"px";
+                 
+            });
+        
+        });
+        document.addEventListener("click", (event) => {
+            // Check if the click is outside any action element
+            if (![...contestAction].some(el => el.contains(event.target)) && 
+                ![...action].some(act => act.contains(event.target))) {
+                action.forEach(act => act.style.display = "none");
+            }
+        });
+        
+        
+    </script>
+</body>
+</html>

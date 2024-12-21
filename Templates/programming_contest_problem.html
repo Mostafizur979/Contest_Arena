@@ -1,0 +1,776 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLCodeverse - Programming Contest Home Page</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nav-area{
+            width: 90%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:#0787EE;
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); 
+            
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(242, 238, 238);
+        }
+        .body-container{
+            width: 90%;
+            margin: 0 auto;
+            background-color: #F8FAFC;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 10px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            justify-content: flex-start;
+            align-items: flex-start;
+        
+            
+        }
+        .body-left-container{
+            width: 50%;
+            border-radius: 5px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-size: 15px;
+            box-sizing: border-box;
+
+        }
+        .problem-description{
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-size: 15px;
+            box-sizing: border-box;
+
+        }
+        .samples{
+            width: 100%;
+            background-color: white;
+
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .input, .output{
+            width: 50%;
+            text-align: left;
+            padding: 15px 10px 15px 0px;
+            box-sizing: border-box;
+            font-size: 14px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-weight: 500;
+       
+
+        }
+
+        .compiler{
+            width: calc(50% - 5px);
+            margin-left: 5px;
+            background-color: #F8FAFC;
+            border-radius: 5px;
+            padding-top: 10px;
+            padding-bottom: 35px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        .menu-bar{
+            width: 100%;
+            display: flex;
+            margin-top: -10px;
+            
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 10px;
+
+        }
+
+        .compiler-btn{
+            border: none;
+            background: none;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-size: 15px;
+
+        }
+   
+        
+        .code-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 700px;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        
+
+  
+        #compiler-design {
+            flex: 1;
+            height: calc(100% - 30px);
+            background-color: #252526; 
+            color: #dcdcdc; 
+            border: none;
+            border-radius: 0;
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            resize: none; 
+            outline: none;
+            box-shadow: none;
+            overflow: auto;
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+            line-height: 1.5em; 
+            border-radius: 5px;
+        }
+        .test-case-section{
+            width: 100%;
+          
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            box-sizing: border-box;
+          
+        }
+        .test-case-header{
+            width: 100%;
+            background-color: rgb(243, 237, 237);
+            display: flex;
+            gap: 5px;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .test-case-status{
+            width: 100%;
+            padding: 0px 10px 10px 10px;
+            box-sizing: border-box;
+            font-family: "Poppins";
+            font-weight: 600;
+            font-style: normal;
+            color: #1B9F45;
+            font-size: 20px;
+            margin-top: -10px;
+         
+        }
+        .test-case-menu{
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding-left: 10px;
+           
+        }
+        .case-btn{
+            padding: 10px;
+            background-color: rgb(253, 250, 250);
+            border-radius: 5px;
+            padding: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #8f97a0;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+        }
+        .dot{
+            width: 5px;
+            height: 5px;
+            background-color: #1B9F45;
+            border-radius: 50%;
+        }
+        .test-case-output{
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+        }
+        #test-output, #test-input, #expected-output{
+            width: 100%;
+            background-color: #F7F7F8;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+        .submission-result{
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            font-size: 15px;
+            box-sizing: border-box;
+          
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .submission-result-status{
+            width: 100%;
+            font-family: "Poppins";
+            font-weight: 600;
+            font-style: normal;
+            color: #1B9F45;
+            font-size: 20px;
+
+        }
+        .user-details{
+            width: 100%;
+            display: flex;
+            gap: 2px;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 12px;
+        }
+        .result-analysis{
+            width: 50%;
+           
+
+        }
+        .test-case-result-text{
+            width: 100%;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+            padding-top: 10px;
+        }
+ 
+    </style>
+</head>
+<body>
+    {% if authenticate == 1%}
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <form action="{% url 'programming_contest_home' %}" method="GET">
+                 
+                    <input type="hidden" name="contestId" value={{contestId}}>
+                    <button class="nav-elements">Contest</button>
+                </form>
+ 
+                <form action="{% url 'programming_leaderboard' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="contestId" value={{contestId}}>
+                    <button class="nav-elements">Leaderboard</button>
+                </form>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="search" placeholder="Contest Id">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+            
+                <form action="{% url 'profile' %}">
+                    {%if pic is not none%}
+                    <button class="profile-btn"> <img src="data:image/png;base64,{{ pic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% else %}
+                    <button class="profile-btn"> <img src="{% static 'profile.png' %}" height="40px" width="40px"  ></button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              
+            </div>
+           
+            </div>    
+        </div>
+        <div class="border-design"></div>
+     
+        {% if cid == '1' %}
+        {% else %}
+        <div class="body-container">
+        <div class="body-left-container">
+         <div class="problem-description">
+            <div class="problem-details">
+               <h1 style="font-size: 22px">{{title}}</h1> 
+            </div>
+            <div class="border-design"></div><br>
+            <div class="problem-details">
+              
+                {{description}}
+            </div>
+            <div class="problem-details">
+                <p style="font-size: 18px">Input</p>
+                {{input}}
+            </div><br>
+            <div class="problem-details">
+                <p style="font-size: 18px">Output</p>
+                {{output}}
+            </div>
+            <br>
+            <br>
+            <div class="samples">
+                <p style="font-size: 18px; width: 100%">Samples</p>
+
+                {% for testcase in testcases%}
+                    <div class="input">Input</div><div class="output">Output</div>
+                    <div class="border-design"></div>
+                    <div class="input" style="font-weight: 400">{{testcase.input}}</div><div class="output" style="font-weight: 400">{{testcase.output}}</div>
+                    <div class="border-design"></div>
+                {% endfor %}
+            </div>
+    
+         </div>
+         
+         {% if  submission == 1 %}
+         <div class="submission-result">
+            <div class="submission-result-status">Accepted</div>
+            <div class="user-details"><img src="{% static 'username.png' %}" height="14px" width="14px"><div>Mostafizur Rahman</div></div>
+            <div class="test-case-result-text">Submission Result</div>
+            <div class="result-analysis">
+                <canvas id="submit-problem-result" style="width:100%; height: 300px;"></canvas>
+            </div>
+
+            <div id="total-test-case" style="display: none">{{totalTestCase}}</div>
+            <div id="pass-test" style="display: none"> {{passTest}}</div>
+            <div id="fail-test" style="display: none"> {{failTest}}</div>
+
+         </div>
+         {% endif %}
+
+        </div>
+         <div class="compiler">
+            <div class="menu-bar">
+                <form id="run-code" action="{% url 'run_code' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="problem-id" value="{{problemId}}">
+                    <input type="hidden" name="contest-id" value="{{contestId}}">
+                    <textarea name="code" id="submission-code" style="display: none"></textarea>
+                    <button class="compiler-btn" id="run-program">
+                        <img src="{% static 'run.png' %}">
+                        <div>Run</div>
+                    </button>
+                </form>
+                <form id="submit-code-form" action="{% url 'submit_code' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="problem-id" value="{{problemId}}">
+                    <input type="hidden" name="contest-id" value="{{contestId}}">
+                    <textarea name="code" id="submit-code" style="display: none"></textarea>
+                    <button class="compiler-btn" id="submit-program">
+                        <img src="{% static 'submit.png' %}">
+                        <div style="color: #1B9F45">Submit</div>
+                    </button>
+                </form>
+            </div>
+            <div class="code-section">
+                <form method="POST">
+                    {% csrf_token %}
+                
+                    <textarea  id="submission-code" style="display: none"></textarea>
+                   
+                </form>
+                <textarea id="compiler-design"  placeholder="// Write your C code here...">{{code}}</textarea>
+     
+         
+            </div>
+          <div class="test-case-section">
+             <div class="test-case-header">
+                <img src="{% static 'testing.png' %}">
+                <div><b>Test Result</b></div>
+             </div>
+             <div style="padding: 5px; width: 100%; box-sizing: border-box; overflow: auto;">
+                <pre style="width: 100%; white-space: pre-wrap; word-wrap: break-word;">{{error}}</pre>
+              </div>
+              
+             {% if state == 1 %}
+             <div class="test-case-status">Accepted</div>
+           
+             <div class="test-case-menu">
+                <div class="case-btn"><div class="dot"></div><div>Case 1</div></div>
+                <div class="case-btn"><div class="dot"></div><div>Case 2</div></div>
+                <div class="case-btn"><div class="dot"></div><div>Case 3</div></div>
+             </div>
+
+             <div class="test-case-output">
+                <div id="test-input">Input = {{input1}} </div>
+                <div id="test-output">Output = {{output1}}  </div>
+                <div id="expected-output">Expected = {{expected1}} </div>
+             </div>
+
+
+             <div class="test-case-output">
+                <div id="test-input">Input = {{input2}}</div>
+                <div id="test-output">Output = {{output2}}  </div>
+                <div id="expected-output">Expected = {{expected2}} </div>
+             </div>
+
+             <div class="test-case-output">
+                <div id="test-input">Input = {{input3}} </div>
+                <div id="test-output">Output = {{output3}}  </div>
+                <div id="expected-output">Expected = {{expected3}} </div>
+             </div>
+            <div style="display: none">
+               <div class="status">{{status1}}</div>
+               <div class="status">{{status2}}</div>
+               <div class="status">{{status3}}</div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      
+       </div>
+       </div>
+       {% endif %}
+       <script>
+       
+        const status = document.querySelector(".test-case-status");
+        const caseBtn = document.querySelectorAll(".case-btn");
+        const testCaseOutput = document.querySelectorAll(".test-case-output");
+        const statusTest = document.querySelectorAll(".status");
+        const dot = document.querySelectorAll(".dot");
+
+
+        statusTest.forEach((data,index)=>{
+            if(data.textContent=="False"){
+                dot[index].style.backgroundColor="#EF474F";
+            }
+        });
+
+        if(statusTest[0].textContent=="False"){
+            status.style.color="#EF474F";
+            status.textContent="Wrong Answer";
+        }
+
+        
+        // Initialize display for test case outputs
+        testCaseOutput[0].style.display = "block";
+        testCaseOutput[1].style.display = "none";
+        testCaseOutput[2].style.display = "none";
+    
+        caseBtn.forEach((data, index) => {
+            data.addEventListener("click", () => {
+                if(statusTest[index].textContent=="False"){
+                    dot[index].style.backgroundColor="#EF474F";
+                    status.style.color="#EF474F";
+                    status.textContent="Wrong Answer";
+                }
+                else{
+                    dot[index].style.backgroundColor="#1B9F45";
+                    status.style.color="#1B9F45";
+                    status.textContent="Accepted";
+                }
+                testCaseOutput[index].style.display = "block";
+                console.log(index);
+  
+                caseBtn.forEach(btn => {
+                    btn.style.backgroundColor = ""; 
+                 
+                });
+    
+                data.style.backgroundColor = "#E9EED9"; 
+               
+                for (var i = 0; i < 3; i++) {
+                    if (i != index) {
+                        testCaseOutput[i].style.display = "none";
+                    }
+                }
+            });
+        });
+        
+    </script>
+    
+   <script>
+
+
+      const compileBtn = document.getElementById("run-program")
+      const code = document.getElementById("compiler-design");
+      const runCode = document.getElementById("run-code");
+      const submissionCode = document.getElementById("submission-code");
+      const uploadForm = document.getElementById("submit-code-form");
+      const uploadCode = document.getElementById("submit-code");
+      const submitBtn = document.getElementById("submit-program");
+
+      compileBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        submissionCode.value = code.value;
+     
+        console.log(submissionCode.value);
+        runCode.submit();
+    });
+
+    submitBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        uploadCode.value = code.value;
+     
+        console.log(uploadCode.value);
+        uploadForm.submit();
+    });
+    
+      
+    
+      
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+   <script>
+      const totalTestCase = document.getElementById("total-test-case");
+      const passTest = document.getElementById("pass-test");
+      const failTest = document.getElementById("fail-test");
+      const submissionResultStatus = document.querySelector(".submission-result-status");
+
+      if(failTest.textContent != 0){
+         submissionResultStatus.style.color="#EF474F";
+         submissionResultStatus.textContent="Wrong Answer";
+      }
+   
+       const primaryBarColors = ["#4CC9FE", "#33FF57", "#EF474F"];
+   
+       const contestValues = [];
+       const yValues = [];
+       const barColors = [];
+   
+       contestValues[0] = "Total Testcase";
+       yValues[0] = parseInt(totalTestCase.textContent);
+       barColors[0] = primaryBarColors[0];
+   
+       contestValues[1] = "Passed";
+       yValues[1] = parseInt(passTest.textContent);
+       barColors[1] = primaryBarColors[1];
+   
+       contestValues[2] = "Failed";
+       yValues[2] = parseInt(failTest.textContent);
+       barColors[2] = primaryBarColors[2];
+   
+       new Chart("submit-problem-result", {
+         type: "bar",
+         data: {
+           labels: contestValues,
+           datasets: [{
+             backgroundColor: barColors,
+          
+             data: yValues,
+             borderRadius: 5 // Rounded bar corners
+           }]
+         },
+         options: {
+           responsive: true,
+           maintainAspectRatio: false,
+           plugins: {
+             legend: { display: false },
+             tooltip: {
+               enabled: true,
+               callbacks: {
+                 label: function(tooltipItem) {
+                   return `Number of Testcase: ${tooltipItem.raw} `;
+                 }
+               }
+             },
+
+           },
+           scales: {
+             x: {
+               ticks: { display: true, color: "#333", font: { size: 12 } },
+               grid: { display: false }
+             },
+             y: {
+               display: false 
+             }
+           },
+           animation: {
+             duration: 1000, 
+             easing: "easeOutBounce" 
+           }
+         },
+        
+       });
+   
+   </script>
+   
+ 
+  {% endif %}
+
+</body>
+</html>

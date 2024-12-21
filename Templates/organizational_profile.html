@@ -1,0 +1,709 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizational Profile</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: flex-start;
+     
+          
+        }
+        #navbar{
+            width: 100%;
+            height: 70px;
+            background-color: #FFFF;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            animation: rightToLeft 1s ease-in-out;
+        }
+        @keyframes rightToLeft{
+            0%{
+                opacity: 0; 
+                transform: translateY(-50px); 
+            }
+            100%{
+                opacity: 1; 
+                transform: translateY(0px); 
+            }
+        }
+    
+
+
+        #nav-area{
+            width: 100%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: "Poppins";
+            font-weight: 600;
+            font-style: normal;
+            font-size: 20px;
+            gap: 5px;
+        }
+
+      .nav-elements::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 3px;
+          background-color: #0787EE;
+          transition: width 0.3s ease-in-out; 
+      }
+      .active-link{
+          color:#0787EE;
+      }
+      
+      .nav-elements:hover::after {
+          width: 100%; 
+      }
+
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); /* Rotate around the Y-axis */
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: calc(100% - 330px);
+            margin: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;  
+            animation: fadeInUp 1s ease-in-out; 
+          }
+          @keyframes fadeInUp {
+              0% {
+                  opacity: 0; 
+                  transform: translateY(50px); 
+              }
+              100% {
+                  opacity: 1; 
+                  transform: translateY(0); 
+              }
+          }
+        .body-content{
+            width: 100%;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .side-bar{
+          width: 300px;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          background-color: white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+          margin: 10px 0px 10px 10px;
+          box-sizing: border-box;
+          position: sticky;
+          top: 5px;
+
+      }
+      .org-logo{
+          width: 200px;
+          margin: 0 auto;
+          padding-top: 25px;
+        
+      }
+      .links, .sub-links{
+          border: none;
+          width: 290px;
+          background: none;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 5px;
+          margin: 0px 0px 0px 10px;
+          font-size: 16px;
+          font-family: "Poppins";
+          font-weight: 400;
+          font-style: normal;
+          color: #2f353b;
+          padding: 10px 0px 10px 10px;
+          cursor: pointer;
+          box-sizing: border-box;
+    
+
+      }
+      .border-menu{
+        width: 270px;
+        height: 1px;
+        background-color: rgb(214, 203, 203);
+     }
+     .sub-links {
+      padding-left: 20px;
+      display: none; 
+      animation: InUp 0.8s ease-in-out; 
+    }
+    @keyframes InUp {
+        0% {
+            opacity: 0; 
+            transform: translateX(-20px); 
+        }
+        100% {
+            opacity: 1; 
+            transform: translateX(0); 
+        }
+    }
+
+      .links:hover, .sub-links:hover{
+          color:  #3598DC;
+          border-top: 1px solid #3598DC;
+          border-bottom: 1px solid #3598DC;
+       }
+       .arrow-1st{
+        width: 24px;
+        position: relative;
+        right: -80px;
+        top: 5px;
+       }
+       .arrow-2nd{
+        width: 24px;
+        position: relative;
+        right: -12px;
+        top: 5px;
+       }
+
+      .short-overview{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .elements{
+            flex-grow: 1;
+            height: 150px;
+            z-index: 1;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+          
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px;
+            box-sizing: border-box;
+
+        }
+      
+        .yearly-contest-info{
+            width: 60%;
+            margin-top: 10px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            height: 400px;
+        }
+        .top-contests-list{
+            width: calc(40% - 10px);
+            margin: 10px 0px 0px 10px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            height: 400px;
+        }
+  
+     
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+          }
+    </style>
+</head>
+<body>
+
+    <div class="Container">
+      <div class="side-bar">
+        <div class="org-logo"> <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a></div><br>
+        <div class="border-menu"></div><br>
+        <form action="{% url 'admin_dashboard' %}">
+          <button class="links"><img src="{% static 'org-dash.png' %}" height="18px" width="18px"><div>Dashboard</div></button>
+        </form>
+       
+        <div class="links"><img src="{% static 'ai.png' %}" height="18px" width="18px"><div>Machine Learning</div><div class="arrow-1st"><img src="{% static 'right.png' %}"  class="arrow"height="18px" width="18px"></div></div>
+
+        <form action="{% url 'admin_ml_contest_list' %}">
+          <button class="sub-links"><img src="{% static 'list.png' %}" height="18px" width="18px"><div>Contest List</div></button>
+        </form>
+        <div class="links"><img src="{% static 'coding.png' %}" height="18px" width="18px"><div>Compettive Programming</div><div class="arrow-2nd"><img  src="{% static 'right.png' %}"  class="arrow" height="18px" width="18px"></div></div>
+
+        <form action="{% url 'admin_programming_Contest_List' %}">
+          <button class="sub-links"><img src="{% static 'list.png' %}" height="18px" width="18px"><div>Contest List</div></button>
+        </form>
+
+        <form action="{% url 'userManagement' %}">
+           <button class="links"><img src="{% static 'user-manage.png' %}" height="18px" width="18px"><div>User Management</div></button>
+        </form>
+        
+        <form action="{% url 'logout' %}">
+        <button class="links"><img src="{% static 'logout.png' %}" height="18px" width="18px"><div>Logout</div></button>
+        </form>
+
+        </div>
+            <script>
+               const links = document.querySelectorAll(".links");
+               const subLink = document.querySelectorAll(".sub-links");
+               const arrowClass= document.querySelectorAll(".arrow");
+               var counter1 = 0;
+               var counter2 = 0;
+               links.forEach((data,index)=>{
+                  data.addEventListener("click",()=>{
+            
+                   if(index==1 && counter1==0){
+                    subLink[0].style.display = "flex";
+                    counter1 = 1;
+                    arrowClass[0].src="{% static 'down.png' %}";
+                   }
+                   else if(counter1==1 && index != 2){
+                    subLink[0].style.display = "none";
+                    counter1=0;
+                    arrowClass[0].src="{% static 'right.png' %}";
+                   }
+                   if(index==2 && counter2==0){
+                    subLink[1].style.display = "flex";
+                    counter2 = 1;
+                    arrowClass[1].src="{% static 'down.png' %}";
+                   }
+                   else if(counter2==1 && index != 1){
+                    subLink[1].style.display = "none";
+                    counter2 = 0;
+                    arrowClass[1].src="{% static 'right.png' %}";
+                   }
+
+                  });
+               });
+            </script>
+           
+        
+            <div class="body-container">
+                <div id="navbar">
+
+                    <div id="nav-area">
+                    <button class="nav-elements"><img src="{% static 'university_logo.png' %}" height="22px" width="22px">&nbsp;{{name}}</button>
+                    <form action="{% url 'admin_user_profile' %}" method="GET">
+                        <input type="hidden" name="userId" value={{userId}}>
+                        <button class="nav-elements" style="background-color: #0930dd; font-size: 15px; color: white; gap: 2px;padding: 10px;border-radius: 5px"><img src="{% static 'totalUser.png' %}" height="15px" width="15px">&nbsp;See Personal Profile</button>
+                    </form>
+
+                    <div class="search-section">
+                        <form style="display: flex">
+                            <input class="input-design" type="text" id="contest-id" placeholder="Search By Contest Id">
+                            <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                        </form>
+                    
+                        <form action="{% url 'profile' %}">
+                        
+                            <button class="profile-btn"> <img src="{% static 'profile.png'%}" height="40px" width="40px"  ></button>
+                            
+                        </form>
+                      
+                    </div>
+                   
+                    </div>    
+                </div>
+                <div class="body-content">
+                    <div class="short-overview">
+                     <div class="elements"  style="background: linear-gradient(to right, #0D92F4,#024CAA);">
+                        <div class="elements-log"><img src="{% static 'total.png' %}"></div>
+                        <div class="elements-text"><div style="font-size: 19px">{{total}}</div><div>Total Contests</div></div>
+                     </div>
+                     <div class="elements"  style="background: linear-gradient(to right, #06e983, #54b388);">
+                         <div class="elements-log"><img src="{% static 'checked.png' %}"></div>
+                         <div class="elements-text"><div style="font-size: 19px">{{complete}}</div><div>Completed Contest</div></div>
+                     </div>
+                     <div class="elements" style="background: linear-gradient(to right, #f35680,#af0432);">
+                         <div class="elements-log"><img src="{% static 'pending.png' %}"></div>
+                         <div class="elements-text"><div style="font-size: 19px">{{pending}}</div><div>Pending Contests</div></div>
+                     </div>
+                     <div class="elements" style="background: linear-gradient(to right, #FF9874, #e74105)">
+                         <div class="elements-log"><img src="{% static 'group.png' %}"></div>
+                         <div class="elements-text"><div style="font-size: 19px">{{team}}</div><div>Team Participates</div></div>
+                     </div>
+                    </div>
+                 </div>
+
+                 <div class="yearly-contest-info">
+                    <canvas id="myChart" style="width:100%;"></canvas>
+                 </div>
+                 <div class="top-contests-list">
+                    <canvas id="top-contest-list" style="width:100%;max-width:600px;"></canvas>
+                 </div>
+
+                 <div style="display: none">
+                  {% for participant in participants %}
+                  <p class="contest-title">{{participant.title}}</p>
+                  <p class="participants-number">{{participant.number}}</p>
+                  {% endfor %}
+                 </div>
+            </div>
+        </div>
+    </div>
+   
+   
+    <script>
+      const xValues = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+      const datasets = [
+        { 
+          data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478, 1330, 2210],
+          borderColor: "red",
+          backgroundColor: "rgba(255, 0, 0, 0.1)",
+          fill: true,
+          label: "2022"
+        },
+        { 
+          data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000, 1900, 2000],
+          borderColor: "green",
+          backgroundColor: "rgba(0, 255, 0, 0.1)",
+          fill: true,
+          label: "2023"
+        },
+        { 
+          data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100, 1100, 600],
+          borderColor: "blue",
+          backgroundColor: "rgba(0, 0, 255, 0.1)",
+          fill: true,
+          label: "2024"
+        }
+      ];
+      
+      // Set the start and end years for the range
+      const startYear = 2022;
+      const endYear = 2024;
+      
+      // Create a string for the year range
+      const yearRange = `${startYear}-${endYear}`;
+      
+      new Chart("myChart", {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: "Yearly Contest Participants Summary", // Add year range dynamically
+              font: {
+                size: 20,
+                weight: "bold"
+              }
+            },
+            tooltip: {
+              enabled: true
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "Months",
+                font: {
+                  size: 14
+                }
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: "Contestants",
+                font: {
+                  size: 14
+                }
+              },
+              grid: {
+                display: false
+              }
+            }
+          },
+          elements: {
+            line: {
+              tension: 0.4
+            }
+          },
+          interaction: {
+            mode: "nearest",
+            intersect: false
+          }
+        }
+      });
+      
+        </script>
+        <script>
+            const contestTitle = document.querySelectorAll(".contest-title");
+            const participantNumber = document.querySelectorAll(".participants-number");
+            const primaryBarColors = ["#FF5733", "#33FF57", "#3357FF", "#FFC300", "#8C33FF"];
+
+            const contestValues = [];
+            const yValues = [];
+            const barColors = [];
+
+            contestTitle.forEach((data,index)=>{
+              contestValues[index] = contestTitle[index].textContent;
+              yValues[index] = parseInt(participantNumber[index].textContent);
+              barColors[index] = primaryBarColors[index];
+
+            });
+
+            contestValues[2] = "Dummy1";
+            yValues[2] = 2;
+            barColors[2] = primaryBarColors[2];
+
+            
+            contestValues[3] = "Dummy2";
+            yValues[3] = 2;
+            barColors[3] = primaryBarColors[3];
+
+            
+            contestValues[4] = "Dummy3";
+            yValues[4] = 1;
+            barColors[4] = primaryBarColors[4];
+
+
+            
+            
+            new Chart("top-contest-list", {
+              type: "bar",
+              data: {
+                labels: contestValues,
+                datasets: [{
+                  backgroundColor: barColors,
+                  hoverBackgroundColor: barColors.map(color => shadeColor(color, -20)),
+                  data: yValues,
+                  borderRadius: 10 // Rounded bar corners
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { display: false },
+                  title: {
+                    display: true,
+                    text: "Top 5 Contests",
+                    font: {
+                      size: 20,
+                      weight: "bold"
+                    },
+                    padding: {
+                      top: 10,
+                      bottom: 30
+                    },
+                    color: "#333"
+                  },
+                  tooltip: {
+                    enabled: true,
+                    callbacks: {
+                      label: function(tooltipItem) {
+                        return `Participates: ${tooltipItem.raw} Team`;
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: "Contests",
+                      font: {
+                        size: 16,
+                     
+                      },
+                      color: "#333"
+                    },
+                    grid: {
+                      display: false // Removes grid lines on X-axis
+                    },
+                    ticks: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    title: {
+                      display: true,
+                      text: "Participants",
+                      font: {
+                        size: 16,
+                        
+                      },
+                      color: "#333"
+                    },
+                    grid: {
+                      color: "#ffff", // Subtle grid line color
+                      borderDash: [5, 5]
+                    },
+                    ticks: {
+                      font: {
+                        size: 14
+                      },
+                      color: "#555"
+                    }
+                  }
+                },
+                animation: {
+                  duration: 1000, // Animation duration
+                  easing: "easeOutBounce" // Animation style
+                }
+              }
+            });
+            
+            // Function to darken the hover color slightly
+            function shadeColor(color, percent) {
+                let f = parseInt(color.slice(1), 16),
+                    t = percent < 0 ? 0 : 255,
+                    p = percent < 0 ? percent * -1 : percent,
+                    R = f >> 16,
+                    G = (f >> 8) & 0x00FF,
+                    B = f & 0x0000FF;
+              
+                // Limit the adjustment to avoid producing pure white
+                const adjust = value => Math.min(Math.max(value, 0), 255);
+              
+                return `#${(
+                  0x1000000 +
+                  adjust(Math.round((t - R) * p) + R) * 0x10000 +
+                  adjust(Math.round((t - G) * p) + G) * 0x100 +
+                  adjust(Math.round((t - B) * p) + B)
+                )
+                  .toString(16)
+                  .slice(1)}`;
+              }
+            </script>
+</body>
+</html>

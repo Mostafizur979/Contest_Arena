@@ -1,0 +1,568 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Contest - Submission</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+   
+    <style>
+        body{
+            margin: 0;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nav-area{
+            width: 80%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:  #0787EE;
+        }
+
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); 
+            
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 0 10px;
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            padding: 5px;
+            background-color: white;
+            
+        }
+
+
+        .contest-details{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .contest-time{
+            width: 100%;
+            height: 200px;
+            border: 1px solid rgb(221, 209, 209);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            gap: 20px;
+            box-shadow: 0px 0px 2px 2px rgb(221, 209, 209);
+            background: linear-gradient(45deg, rgb(5, 172, 239), rgb(243, 9, 161));
+            animation: fadeLeftRight 1s ease-in-out;
+
+        }
+        @keyframes fadeLeftRight {
+            0% {
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .about-contest{
+            width: 100%;
+            border: 1px solid rgb(221, 209, 209);
+            padding: 10px;
+            font-size: 15px;
+            font-family: sans-serif;
+            color: rgb(74, 69, 69);
+            line-height: 1.3;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(221, 209, 209);
+            animation: fadeRightLeft 1s ease-in-out;
+
+        }
+        @keyframes fadeRightLeft {
+            0% {
+                opacity: 0; 
+                transform: translateX(50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        .others-details{
+            width: calc(50% - 7px);
+            box-shadow: 0px 0px 2px 2px rgb(221, 209, 209);
+            border: 1px solid rgb(221, 209, 209);
+            padding: 10px;
+            font-size: 15px;
+            font-family: sans-serif;
+            color:rgb(74, 69, 69);
+            box-sizing: border-box;
+            line-height: 1.3;
+            border-radius: 10px;
+        }
+        .time-elements{
+            width: 120px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            background-color: #2C1C7E;
+            border-radius: 5px;
+            box-shadow: 0px 0px 2px 2px white;
+            margin-top: -50px;
+           
+        }
+        .times{
+            width: 100%;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .time-text{
+            width: 100%;
+            height: 25px;
+            background-color: #c6cdd4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: #2C1C7E;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            
+            
+        }
+        #drop-area {
+            width: 300px;
+            height: 150px;
+            border: 2px dashed #aaa;
+            border-radius: 10px;
+            margin: 20px auto;
+            line-height: 150px;
+            color: #888;
+            text-align: center;
+        }
+        #drop-area.dragover {
+            border-color: #007BFF;
+            color: #007BFF;
+        }
+        #file-input {
+            display: none;
+            
+        }
+        #message{
+            text-align: center;
+        }
+
+        #submit-btn{
+            width: 100px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: sans-serif;
+            border: none;
+            background-color: skyblue;
+            border-radius: 10px;
+            position: relative;
+            left: calc(50% - 50px);
+        }
+        #countdown{
+            width: 100%;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+
+        }
+        
+   
+
+       
+        
+    </style>
+</head>
+<body>
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <form action="{% url 'ml_contest_home' %}" method="GET">
+                  
+                    <input type="hidden" name="contestId" value={{cid}}>
+                    <button class="nav-elements">Contest</button>
+                </form>
+                <form action="{% url 'ml_submissions' %}" meethod="GET">
+                  
+                    <input type="hidden" name="contestId" value={{cid}}>
+                    <button class="nav-elements active-link">Submissions</button>
+                </form>
+                <form action="{% url 'ml_leaderboard' cid %}" meethod="GET">
+                  
+                    <button class="nav-elements">Leaderboard</button>
+                </form>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="search" placeholder="Contest Id">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+   
+                <form action="{% url 'profile' %}">
+                    {%if pic is not none%}
+                    <button class="profile-btn"> <img src="data:image/png;base64,{{ pic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% else %}
+                    <button class="profile-btn"> <img src="{% static 'profile.png' %}" height="40px" width="40px"  ></button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              
+            </div>
+           
+            </div>    
+        </div>
+        <div class="border-design"></div>
+        {% if cid == '1' %}
+        {% else %}
+        <div class="body-container">
+
+        <div class="contest-details">
+            <div class="contest-time">
+                <div class="time-elements" style="display: none">{{day}}</div>
+                <div class="time-elements" style="display: none">{{month}}</div>
+                <div class="time-elements" style="display: none">{{year}}</div>
+                <div class="time-elements" style="display: none">{{hour}}</div>
+                <div class="time-elements" style="display: none">{{min}}</div>
+                <div class="time-elements" style="display: none">{{sec}}</div>
+                <div id="countdown">Countdown to Contest Start</div>
+                <div class="time-elements" style="display: none">
+                    <div class="times"></div>
+                    <div class="time-text">Days</div>
+                </div>
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Hours</div>
+                </div>
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Minutes</div>
+                </div>
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Seconds</div>
+                </div>
+            </div>
+            <div class="about-contest">
+                <div id="drop-area">Drag & Drop CSV File Here</div>
+                <form action="{% url 'file_Submit' %}"  enctype="multipart/form-data" method="POST">
+
+                     {% csrf_token %} 
+                   <input type="file" id="file-input" name="csv_file" accept=".csv">
+                   <input type="hidden" name="contestId" value={{cid}}>
+                   <input type="hidden" name="userId" value={{uid}}>
+                   <button type="submit" id="submit-btn">Submit</button>
+                </form>
+                <p id="message"></p>
+                <div style="display: none" class="shape">{{rows}}</div>
+                <div style="display: none" class="shape">{{columns}}</div>
+                <script>
+                    const dropArea = document.getElementById('drop-area');
+                    const fileInput = document.getElementById('file-input');
+                    const message = document.getElementById('message');
+                    const btn = document.getElementById('submit-btn');
+                    const shape = document.querySelectorAll(".shape");
+
+                    btn.style.display="none";
+
+                    let rows = parseInt(shape[0].textContent);
+                    let columns = parseInt(shape[1].textContent);
+
+
+                    // Helper function to parse CSV
+                    function parseCSV(content) {
+                        const rows = content.trim().split('\n');
+                        const rowCount = rows.length;
+                        const columnCount = rows[0].split(',').length;
+                        return { rowCount, columnCount };
+                    }
+
+                    // Validate the CSV content
+                    function validateCSV(file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            const content = event.target.result;
+                            const { rowCount, columnCount } = parseCSV(content);
+
+                            if (rowCount === rows && columnCount === columns) {
+                                btn.style.display="block";
+                                message.style.display="none";
+                            } else {
+                                message.textContent = `Invalid CSV file! Found ${rowCount} rows and ${columnCount} columns.`;
+                                message.style.color = "red";
+                                btn.style.display="none";
+                                message.style.display="block";
+                            }
+                        };
+                        reader.readAsText(file);
+                    }
+
+                    // Handle file drop
+                    dropArea.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        dropArea.classList.add('dragover');
+                    });
+
+                    dropArea.addEventListener('dragleave', () => {
+                        dropArea.classList.remove('dragover');
+                    });
+
+                    dropArea.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        dropArea.classList.remove('dragover');
+
+                        const file = e.dataTransfer.files[0];
+                        if (file && file.type === 'text/csv') {
+                            validateCSV(file);
+                        } else {
+                            message.textContent = "Please upload a valid CSV file.";
+                            message.style.color = "red";
+                        }
+                    });
+
+                    // Handle file input (optional if user clicks)
+                    dropArea.addEventListener('click', () => fileInput.click());
+                    fileInput.addEventListener('change', (e) => {
+                        const file = e.target.files[0];
+                        if (file && file.type === 'text/csv') {
+                            validateCSV(file);
+                        } else {
+                            message.textContent = "Please upload a valid CSV file.";
+                            message.style.color = "red";
+                        }
+                    });
+                </script>
+            </div>
+
+        </div>
+    </div>
+   {% endif %}
+<script>
+    var timeElements = document.querySelectorAll(".time-elements");
+    const aboutContest = document.querySelector(".about-contest");
+    const dateTime = new Date();
+
+   
+    var smin,shour,ssec,hours,minutes,seconds;
+    var cmin=24,chour=10,csec=11;
+    ssec = parseInt(timeElements[5].textContent);
+    smin = parseInt(timeElements[4].textContent);
+    shour = parseInt(timeElements[3].textContent);
+    
+    var dateObj=new Date();
+    chour=dateObj.getHours();
+    cmin=dateObj.getMinutes();
+    csec=dateObj.getSeconds();
+ 
+   console.log(shour+":"+smin+":"+ssec);
+
+ 
+
+    chour = shour - chour;
+    cmin = smin - cmin;
+    csec = ssec - csec;
+
+    console.log(chour+":"+cmin+":"+csec);
+    var flag=1;
+
+    function calcTime(){
+        if(chour<1){
+            chour=0;
+            if(cmin<1){
+                cmin=0;
+                flag=0;
+                
+            }
+        }
+    
+        if(csec<1 && flag==1){
+            csec = csec + 59;
+            cmin = cmin - 1;
+
+        }
+        if(cmin<1 && chour!=0){
+            cmin = cmin + 59;
+            chour = chour - 1;
+        }
+
+        minutes=cmin;
+        seconds=csec;
+
+        if(minutes<10){
+            minutes = "0"+minutes;
+        }
+        if(seconds<10){
+            seconds = "0"+seconds;
+        }
+   
+  
+         timeElements[7].children[0].innerHTML="0"+chour;
+         timeElements[8].children[0].innerHTML=minutes;
+         timeElements[9].children[0].innerHTML=seconds;
+     
+         if(chour<=0 && cmin<=0 && csec<=0){
+            aboutContest.style.display="none";
+            timeElements[7].children[0].innerHTML='00';
+            timeElements[8].children[0].innerHTML='00';
+            timeElements[9].children[0].innerHTML='00';
+        }
+        csec--;
+    }
+ 
+         
+    setInterval(calcTime,1000);
+        
+</script>
+
+</body>
+</html>

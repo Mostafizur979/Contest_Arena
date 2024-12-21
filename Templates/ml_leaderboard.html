@@ -1,0 +1,356 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Contest Leaderboard</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+   
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #nav-area{
+            width: 80%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+      
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+         
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:  #0787EE;
+        }
+
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+
+        #current-page{
+            
+            border-bottom: 3px solid cadetblue;
+            
+        }
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); 
+            
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-size: 16px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-in-out;
+        
+
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0; 
+                transform: translateY(100px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        .contest-list{
+            width: 100%;
+        }
+        table {
+
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #3598DC;
+        }
+        
+        th, td {
+            padding: 15px;
+            padding-left: 20px;
+            text-align: center;
+            font-size: 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            
+           
+        }
+        thead {
+          background-color: #f5f5f5; 
+          position: sticky; 
+          top: 0; 
+          z-index: 10;
+        }
+        
+        th {
+            background-color: #3598DC;
+            color: white;
+           
+        }
+        tr{
+            border-bottom: 1px solid skyblue;
+        }
+        tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+        tr:hover {
+            background-color: rgb(213, 233, 241);
+            color: black;
+            margin: 10px;
+        }
+        .directory{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 15px;
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+            font-weight: 500;
+        }
+   
+
+    </style>
+</head>
+<body>
+
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <form action="{% url 'ml_contest_home' %}" method="GET">
+                  
+                    <input type="hidden" name="contestId" value={{cid}}>
+                    <button class="nav-elements">Contest</button>
+                </form>
+                <form action="{% url 'ml_submissions' %}" method="GET">
+                  
+                    <input type="hidden" name="contestId" value={{cid}}>
+                    <button class="nav-elements">Submissions</button>
+                </form>
+                <form action="{% url 'ml_leaderboard' cid %}" method="GET">
+                  
+                    <button class="nav-elements active-link" >Leaderboard</button>
+                </form>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="text" id="team-id" placeholder="Your team name">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+            
+                <form action="{% url 'profile' %}">
+                    {%if pic is not none%}
+                    <button class="profile-btn"> <img src="data:image/png;base64,{{ pic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% else %}
+                    <button class="profile-btn"> <img src="{% static 'profile.png' %}" height="40px" width="40px"  ></button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              
+            </div>
+           
+            </div>    
+        </div>
+        <div class="border-design"></div>
+ 
+        <div class="body-container">
+            <div class="contest-list">
+                <table>
+           
+                        <tr>
+                            <th>#</th>
+                            <th>Team</th>
+                            <th>Members</th>
+                            <th>Score</th>
+                            <th>Entries</th>
+                            <th>Last</th>
+                        </tr>
+
+  
+                    {% for rank in teams %}
+            
+                   <tr class="contest-data">
+                    <td>{{rank.serial}}</td>
+                    <td>{{rank.team }}</td>
+                    <td>
+                        {% if rank.img1 != ''%}
+                        <img src="data:image/png;base64,{{ rank.img1 }}" height="40px" width="40px" style="border-radius: 50%"> 
+                        {% else %}
+                        <img src="{% static 'profile.png' %}" height="40px" width="40px"  >
+                        {% endif %}
+                        {% if rank.img2 != '' %}
+                        <img src="data:image/png;base64,{{ rank.img2 }}" height="40px" width="40px" style="border-radius: 50%"> 
+                        {% endif %}
+                        {% if rank.img3 != '' %}
+                        <img src="data:image/png;base64,{{ rank.img3 }}" height="40px" width="40px" style="border-radius: 50%"> 
+                        {% endif %}
+                    </td>
+                    <td>{{rank.accuracy}}</td>
+                    <td>{{rank.entry}}</td>
+                    <td>{{rank.last_submit}}</td>
+                
+                   {% endfor %}
+   
+            
+        </div>
+    </div>
+   
+    <script>
+        const contestData = document.querySelectorAll(".contest-data");
+        const teamId = document.getElementById("team-id");
+        
+        let search = '';
+        teamId.addEventListener("keyup",function(e){
+            search=teamId.value;
+            console.log(search);
+           
+            if(search.length==0){
+                contestData.forEach((data,i)=>{
+                    data.style.display="table-row";
+                });
+            }
+            contestData.forEach((data,i)=>{
+                data.style.display="none";
+            });
+            contestData.forEach((data,i)=>{
+                if(data.children[1].textContent.includes(search)){
+                  console.log(data.children[1].textContent);
+                  data.style.display="table-row";
+                };
+            });
+          
+        });
+       
+    </script>
+</body>
+</html>

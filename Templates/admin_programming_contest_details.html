@@ -1,0 +1,478 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Contest Details</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+   
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: flex-start;
+     
+          
+        }
+        #navbar{
+            width: 100%;
+            height: 70px;
+            background-color: #FFFF;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            animation: rightToLeft 1s ease-in-out;
+        }
+        @keyframes rightToLeft{
+            0%{
+                opacity: 0; 
+                transform: translateY(-50px); 
+            }
+            100%{
+                opacity: 1; 
+                transform: translateY(0px); 
+            }
+        }
+    
+        #nav-area{
+            width: 100%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: "Poppins";
+            font-weight: 600;
+            font-style: normal;
+            font-size: 20px;
+            gap: 5px;
+        }
+
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:#0787EE;
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); /* Rotate around the Y-axis */
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: calc(100% - 330px);
+            margin: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap; 
+            animation: fadeInUp 1s ease-in-out; 
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .body-content{
+            width: 100%;
+           
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+
+        }
+        #banner{
+            width: calc(100%);
+          
+            border-radius: 5px;
+        }
+
+      .org-logo{
+          width: 200px;
+          margin: 0 auto;
+          padding-top: 10px;
+      }
+      .side-bar{
+        width: 300px;
+        height: 100vh;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: center;
+         background-color: white;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         border-radius: 10px;
+         margin: 10px 0px 10px 10px;
+         box-sizing: border-box;
+         position: sticky;
+         top: 5px;
+         animation: fadeInUp 1s ease-in-out;
+       
+       }
+
+       .org-logo{
+           width: 200px;
+           margin: 0 auto;
+           padding-top: 25px;
+         
+       }
+       .links, .sub-links{
+           border: none;
+           width: 290px;
+           background: none;
+           display: flex;
+           justify-content: flex-start;
+           align-items: center;
+           gap: 5px;
+           margin: 0px 0px 0px 10px;
+           font-size: 16px;
+           font-family: "Poppins";
+           font-weight: 400;
+           font-style: normal;
+           color: #2f353b;
+           padding: 10px 0px 10px 10px;
+           cursor: pointer;
+           box-sizing: border-box;
+     
+ 
+       }
+       .border-menu{
+         width: 270px;
+         height: 1px;
+         background-color: rgb(214, 203, 203);
+        }
+        .sub-links {
+        padding-left: 20px;
+        display: none; 
+    
+        }
+    
+       .links:hover, .sub-links:hover{
+           color:  #3598DC;
+           border-top: 1px solid #3598DC;
+           border-bottom: 1px solid #3598DC;
+        }
+        .arrow-1st{
+         width: 24px;
+         position: relative;
+         right: -80px;
+         top: 5px;
+        }
+        .arrow-2nd{
+         width: 24px;
+         position: relative;
+         right: -12px;
+         top: 5px;
+        }
+        .text{
+            font-size: 16px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal
+        }
+        .text pre {
+            white-space: pre-wrap;
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
+            max-width: 100%; 
+            font-size: 16px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal
+        }
+        .title{
+            width: calc(100% - 20px);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            background-color: #0787EE;
+            border-radius: 5px;
+            margin-top: 5px;
+            transition: all 0.7s ease-in-out;
+        }
+        .title:hover{
+            background-color: #ee9207;
+        }
+        .contest-info{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+
+
+        }
+        .contest-elements{
+            flex-grow: 1;
+            padding: 10px;
+            background-color: #8fc78b;
+            border: 1px solid #8fc78b;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.7s ease-in-out;
+        }
+        .contest-elements:hover{
+            background-color: white;
+            color: #8fc78b;
+        }
+        .author-details{
+            width: calc(100% - 20px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            background-color: #8fc78b;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: white;
+
+        }
+        .author-image{
+            height: 160px;
+            width: 160px;
+            border-radius: 50%;
+            background-color: white;
+
+        }
+        .author-info{
+            width: calc(100% - 220px);
+   
+        }
+        .author-info-text{
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.7s ease-in-out;
+        }
+        .author-info-text:hover{
+            background-color: white;
+            color: #8fc78b;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="Container">
+
+        <div class="side-bar">
+            <div class="org-logo"> <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a></div><br>
+            <div class="border-menu"></div><br>
+            <form action="{% url 'admin_dashboard' %}">
+              <button class="links"><img src="{% static 'org-dash.png' %}" height="18px" width="18px"><div>Dashboard</div></button>
+            </form>
+           
+            <div class="links"><img src="{% static 'ai.png' %}" height="18px" width="18px"><div>Machine Learning</div><div class="arrow-1st"><img src="{% static 'right.png' %}"  class="arrow"height="18px" width="18px"></div></div>
+
+            <form action="{% url 'admin_ml_contest_list' %}">
+              <button class="sub-links"><img src="{% static 'list.png' %}" height="18px" width="18px"><div>Contest List</div></button>
+            </form>
+            <div class="links"><img src="{% static 'coding.png' %}" height="18px" width="18px"><div>Compettive Programming</div><div class="arrow-2nd"><img  src="{% static 'right.png' %}"  class="arrow" height="18px" width="18px"></div></div>
+
+            <form action="{% url 'admin_programming_Contest_List' %}">
+              <button class="sub-links"><img src="{% static 'list.png' %}" height="18px" width="18px"><div>Contest List</div></button>
+            </form>
+
+            <form action="{% url 'userManagement' %}">
+               <button class="links"><img src="{% static 'user-manage.png' %}" height="18px" width="18px"><div>User Management</div></button>
+            </form>
+            
+            <form action="{% url 'logout' %}">
+            <button class="links"><img src="{% static 'logout.png' %}" height="18px" width="18px"><div>Logout</div></button>
+            </form>
+
+            </div>
+            <script>
+               const links = document.querySelectorAll(".links");
+               const subLink = document.querySelectorAll(".sub-links");
+               const arrowClass= document.querySelectorAll(".arrow");
+               var counter1 = 0;
+               var counter2 = 0;
+               links.forEach((data,index)=>{
+                  data.addEventListener("click",()=>{
+            
+                   if(index==1 && counter1==0){
+                    subLink[0].style.display = "flex";
+                    counter1 = 1;
+                    arrowClass[0].src="{% static 'down.png' %}";
+                   }
+                   else if(counter1==1 && index != 2){
+                    subLink[0].style.display = "none";
+                    counter1=0;
+                    arrowClass[0].src="{% static 'right.png' %}";
+                   }
+                   if(index==2 && counter2==0){
+                    subLink[1].style.display = "flex";
+                    counter2 = 1;
+                    arrowClass[1].src="{% static 'down.png' %}";
+                   }
+                   else if(counter2==1 && index != 1){
+                    subLink[1].style.display = "none";
+                    counter2 = 0;
+                    arrowClass[1].src="{% static 'right.png' %}";
+                   }
+
+                  });
+               });
+            </script>
+        
+        <div class="body-container">
+            <div id="navbar">
+
+                <div id="nav-area">
+                <button class="nav-elements"><img src="{% static 'details.png' %}" height="22px" width="22px">&nbsp;Programming Contest Details</button>
+                <div class="search-section">
+                    <form style="display: flex">
+                        <input class="input-design" type="text" id="contest-id" placeholder="Search By Contest Id">
+                        <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                    </form>
+                
+                    <form action="{% url 'profile' %}">
+                    
+                        <button class="profile-btn"> <img src="{% static 'profile.png'%}" height="40px" width="40px"  ></button>
+                        
+                    </form>
+                  
+                </div>
+               
+                </div>    
+            </div>
+           <div class="body-content">
+            <img id="banner" src="data:image/png;base64,{{ image }}">
+               
+                    <div class="text title" style="font-size: 22px; font-weight: 700">{{contestTitle}}</div> 
+                    <div class="contest-info">
+                        <div class="text contest-elements"><img src="{% static 'calendar.png' %}" height="20px" width="20px">Contest Date: {{contestDate}}</div>    
+                        <div class="text contest-elements"><img src="{% static 'time.png' %}" height="20px" width="20px">Contest Time: {{contestTime}}</div> 
+                        <div class="text contest-elements"><img src="{% static 'online-event-registration.png' %}" height="20px" width="20px">Registration Date: {{registrationDate}}</div>    
+                        <div class="text contest-elements"><img src="{% static 'fees.png' %}" height="20px" width="20px">Contest Fee: {{contestFee}}<img src="{% static 'taka.png' %}" style="margin: -5px 0px 0px -5px" height="16px" width="16px"></div>    
+                    </div>
+                    <div class="author-details">
+                        <div class="author-image">   <img src="data:image/png;base64,{{ profilePic }}"  height="160px" width="160px" style="border-radius: 50%"></div>
+                        <div class="author-info">
+                            <div class="author-info-text">Name: {{name}}</div>
+                            <div class="author-info-text">Email: {{email}}</div>
+                            <div class="author-info-text">University: {{University}}</div>
+                            <div class="author-info-text">Role: {{role}}</div>
+                        </div>
+                    </div>   
+                    <div class="text"><pre><b>About Contest</b><br>{{aboutContest}}</pre></div>    
+                    <div class="text"><pre><b>Rules</b><br>{{rules}}</pre></div>    
+ 
+
+    </div>
+   </div>
+</div>
+</body>
+</html>

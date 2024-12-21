@@ -1,0 +1,521 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Contest - Home</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+   
+    <style>
+        body{
+            margin: 0;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nav-area{
+            width: 80%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); 
+            
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 10px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+         
+        }
+
+        .banner{
+            width: 100%;
+            animation: fadeLeftRight 1s ease-in-out;
+
+        }
+        @keyframes fadeLeftRight {
+            0% {
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .banner-design{
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+        }
+        .title-bar{
+            background: transparent;
+            backdrop-filter: blur(5px);
+            border: 1px solid white;
+            position: relative;
+            top: -200px;
+            width: 60%;
+            font-size: 27px;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 20px;
+            margin: 0 auto;
+        }
+
+        .contest-details{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+       
+            gap: 10px;
+        }
+
+        .contest-time{
+            width: 100%;
+            height: 200px;
+            border: 1px solid rgb(221, 209, 209);
+            box-shadow: 0px 0px 2px 2px rgb(221, 209, 209);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: -30px;
+            border-radius: 10px;
+            gap: 20px;
+            background: linear-gradient(45deg, rgb(5, 172, 239), rgb(243, 9, 161));
+            animation: fadeRightLeft 1s ease-in-out;
+
+        }
+        @keyframes fadeRightLeft {
+            0% {
+                opacity: 0; 
+                transform: translateX(50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        .about-contest{
+            width: 100%;
+            border: 1px solid rgb(221, 209, 209);
+            font-size: 15px;
+            font-family:  "Poppins";
+            color: rgb(74, 69, 69);
+            line-height: 1.3;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #0787EE;
+            margin-top: 10px;
+            animation: fadeLeftRight 1s ease-in-out;
+
+        }
+        .title-text{
+            width: 100%;
+            background-color: #0787EE;
+            text-align: center;
+            color: white;
+            font-size: 17px;
+            padding: 10px;
+        }
+        .body-text{
+            width: 100%;
+            padding: 10px;
+        }
+      
+
+        .others-details{
+            width: calc(50% - 7px);
+            border: 1px solid #0787EE;
+            margin-top: 10px;
+            font-size: 15px;
+            font-family: "Poppins";
+            box-sizing: border-box;
+            line-height: 1.3;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeRightLeft 1s ease-in-out;
+        }
+        .time-elements{
+            width: 120px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            background-color: #2C1C7E;
+            box-sizing: border-box;
+            border-radius: 5px;
+            overflow: hidden;
+         
+           
+        }
+        .times{
+            width: 100%;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .time-text{
+            width: 100%;
+            height: 25px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #2C1C7E;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            
+            
+        }
+        .text-style{
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 15px;
+            font-weight: 400;
+         
+        }
+        
+   
+
+       
+        
+    </style>
+</head>
+<body>
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <form action="{% url 'ml_contest_home' %}" method="GET">
+                  
+                    <input type="hidden" name="contestId" value={{cid}}>
+                    <button class="nav-elements">Contest</button>
+                </form>
+                <form action="{% url 'ml_submissions' %}" meethod="GET">
+                  
+                    <input type="hidden" name="contestId" value={{cid}}>
+                    <button class="nav-elements">Submissions</button>
+                </form>
+                <form action="{% url 'ml_leaderboard' cid %}" meethod="GET">
+                  
+                    <button class="nav-elements">Leaderboard</button>
+                </form>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="search" placeholder="Contest Id">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+            
+                <form action="{% url 'profile' %}">
+                    {%if pic is not none%}
+                    <button class="profile-btn"> <img src="data:image/png;base64,{{ pic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% else %}
+                    <button class="profile-btn"> <img src="{% static 'profile.png' %}" height="40px" width="40px"  ></button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              
+            </div>
+           
+            </div>    
+        </div>
+        <div class="border-design"></div>
+        {% if cid == '1' %}
+        {% else %}
+        <div class="body-container">
+        <div class="banner">
+            <img class="banner-design" src="data:image/png;base64,{{ image }}">
+            <div class="title-bar">{{contestTitle}}</div>
+        </div>
+       
+        <div class="contest-details">
+            <div class="contest-time">
+                <div class="time-elements" style="display: none">{{day}}</div>
+                <div class="time-elements" style="display: none">{{month}}</div>
+                <div class="time-elements" style="display: none">{{year}}</div>
+                <div class="time-elements" style="display: none">{{hour}}</div>
+                <div class="time-elements" style="display: none">{{min}}</div>
+                <div class="time-elements" style="display: none">{{sec}}</div>
+
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Days</div>
+                </div>
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Hours</div>
+                </div>
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Minutes</div>
+                </div>
+                <div class="time-elements">
+                    <div class="times"></div>
+                    <div class="time-text">Seconds</div>
+                </div>
+            </div>
+            <div class="about-contest">
+                <div class="title-text">About Contest</div>
+                <div class="body-text"><pre style="white-space: pre-wrap;" class="text-style">{{aboutContest}}</pre></div>
+
+            </div>
+            <div class="others-details">
+                <div class="title-text">About Dataset</div>
+                <div class="body-text"><pre style="white-space: pre-wrap;" class="text-style">{{aboutDataset}}</pre></div>
+            </div>
+            <div class="others-details">
+                <div class="title-text">Submission Guideline</div>
+                <div class="body-text"> <pre style="white-space: pre-wrap;" class="text-style">{{submissionGuideLine}}</pre> </div>
+            </div>
+            <div class="about-contest">
+                <div class="title-text">Dataset Link</div>
+                <div class="body-text" style="padding: 10px; text-align: center"><a href={{datasetLink}}>Click Here</a></div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+<script>
+    var timeElements = document.querySelectorAll(".time-elements");
+    const dateTime = new Date();
+
+        var sdate,smonth,syear,smin,shour,ssec;
+        var edate=4,emonth=4,eyear=2024,emin=24,ehour=10,esec=11;
+        esec = parseInt(timeElements[5].textContent);
+        emin = parseInt(timeElements[4].textContent);
+        ehour = parseInt(timeElements[3].textContent);
+        
+        eyear = parseInt(timeElements[2].textContent);
+        emonth = parseInt(timeElements[1].textContent);
+        edate = parseInt(timeElements[0].textContent);
+ 
+        var dateObj=new Date();
+        sdate=dateObj.getDate();
+        smonth=dateObj.getMonth()+1;
+        syear=dateObj.getFullYear();
+        shour=dateObj.getHours();
+        smin=dateObj.getMinutes();
+        ssec=dateObj.getSeconds();
+        console.log(eyear+"-"+emonth+"-"+edate);
+        console.log(ehour+":"+emin+":"+esec);
+
+        sdate=edate-sdate;
+        smonth=emonth-smonth;
+        syear=eyear-syear;
+        ssec=esec-ssec;
+        smin=emin-smin;
+        shour=ehour-shour;
+        shour=shour+syear*365*24+smonth*30*24+sdate*24;
+        var flag=1;
+        console.log(shour+":"+smin+":"+ssec);
+
+    function calcTime(){
+        if(shour<=0){
+            shour=0;
+            if(smin<=0){
+                flag=0;
+            }
+         }
+         if(ssec<0 && flag==1){
+             ssec=59;
+             smin--;
+             
+         }
+         
+         if(smin<0 && shour!=0){
+             smin=59;
+             shour--;
+             
+         }
+
+         
+         var days = Math.floor(shour/24);
+         hours = String(shour%24);
+         minutes=smin;
+         seconds=ssec;
+         var tday,thour;
+         tday=days;
+         thour=hours;
+         
+         if(days < 10){
+            days = "0"+days;
+         }
+         if(hours < 10){
+            hours="0"+hours;
+         }
+         if(minutes<10){
+            minutes="0"+minutes;
+         }
+         if(seconds<10){
+            seconds="0"+seconds;
+         }
+         ssec--;
+
+
+         if(tday<=0 && thour<=0 && smin<=0 && ssec<=0){
+            timeElements[6].children[0].innerHTML="00";
+            timeElements[7].children[0].innerHTML="00";
+            timeElements[8].children[0].innerHTML="00";
+            timeElements[9].children[0].innerHTML="00";
+         }
+         else{
+            timeElements[6].children[0].innerHTML=days;
+            timeElements[7].children[0].innerHTML=hours;
+            timeElements[8].children[0].innerHTML=minutes;
+            timeElements[9].children[0].innerHTML=seconds;
+         }
+    }
+ 
+         
+        setInterval(calcTime,1000);
+        
+</script>
+
+</body>
+</html>

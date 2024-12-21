@@ -1,0 +1,342 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        body{
+            margin: 0px;
+        }
+        .signin-container {
+            width: 100%;
+            height: 1000px;
+            background-repeat: no-repeat;
+            background-size: cover;        
+            background-position: center; 
+            margin: 0 ; 
+            position: fixed;
+            background-color: #F8FAFC;
+        }
+        .signin-form{
+            width: 450px;
+            margin: 0 auto;
+            position: relative;
+            top: 100px;
+            background-color: white;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+         
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .signin-form-design{
+            width: 100%;
+            margin-bottom: 30px;
+            background-color: white;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: .875rem;
+            display: flex;
+            color:  #5C6873;
+        }
+        .input-design-signin {
+            width: 80%; 
+            padding: 10px; 
+            margin-left: 10%;
+            font-size: 15px;
+            text-align: start;
+            border: none;
+            border: 1px solid  rgb(214, 203, 203);
+            border-radius: 5px;
+            box-sizing: border-box;
+            color:  #5C6873;
+            background-color: white;
+            margin-bottom: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+            transition: 1s;
+        }
+        .button-design-signin{
+            width: 80%; 
+            padding: 10px; 
+            margin-left: 10%;
+           
+            font-size: 16px;
+            border: 1px solid white;
+            border-radius: 10px;
+            color: white;
+            background-color: #3598DC;
+            margin-bottom: 10px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            box-sizing: border-box;
+        } 
+        .button-design-signin:hover{
+            background-color: rgb(241, 118, 3);
+            color: white;
+        }
+        .input-design-signin:focus{
+            outline: none;
+            border: 1px solid skyblue;
+        }
+        .signin-logo{
+            width: 40%;
+            margin: 0 auto;
+            margin-bottom: 50px;
+        }
+        .header-text{
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: -50px;
+        }
+        #signin-logo-design{
+            height: 50px;
+            width: 100%;
+            border-radius: 10px;
+            
+        }
+        .login-side-icon{
+            height: 20px;
+            width: 20px;
+            margin-left: -30px;
+            margin-top: 10px;
+        }
+        #hide-pass{
+            display: none;
+        }
+        #hide-pass-signup{
+            display: none;
+        }
+        .create-account{
+            color: #5C6873;
+            float: right;
+            margin-top: -30px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            margin-right: 10%;
+        }
+       #signup{
+         background-color: white;
+         border: none; 
+         color: rgb(236, 133, 8); 
+         font-size: 15px;
+         font-weight: 500;
+       }
+       #signup:hover{
+        color: #2b86c5;
+       }
+
+
+       .loader {
+        display: none;
+        gap: 5px;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      .bar {
+        width: 10px;
+        height: 50px;
+        background: linear-gradient(45deg, #ff3cac, #784ba0, #2b86c5);
+        border-radius: 5px;
+        animation: grow-shrink 1.5s ease-in-out infinite;
+      }
+      
+      .bar:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      
+      .bar:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      
+      .bar:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      
+      .bar:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      
+      @keyframes grow-shrink {
+        0%, 100% {
+          height: 50px;
+        }
+        50% {
+          height: 20px;
+        }
+      }
+    </style>
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-form">
+            <div class="signin-logo"><img id="signin-logo-design" src="{% static 'logo.png' %}" height="60px"  width="150px" ></div>
+            <div class="header-text">Login <span style="color: #f97007">MLCodeVerse</span> </div><br>
+            <form action="{% url 'signin' %}" method="post" id="signin-form">
+                {% csrf_token %}
+                <div class="signin-form-design">
+                    <input type="email" name="uid" placeholder="Email" class="input-design-signin" required>
+                    <img  style="z-index: 1" class="login-side-icon" src="{% static 'new-mail.png' %}">
+                </div>
+                <div class="signin-form-design">
+                    <input type="password" name="password" id="passwordView" placeholder="Password" class="input-design-signin" required>
+                    <img style="z-index: 1" class="login-side-icon" id="view-pass" onclick="View_Pass()" src="{% static 'pass-view.png' %}">
+                    <img style="z-index: 1" class="login-side-icon" id="hide-pass" onclick="Hide_Pass()" src="{% static 'hide-new.png' %}">
+                </div>
+               
+                <div class="signin-form-design">
+                   <button  type="submit" class="button-design-signin" id="submit-btn">Signin</button>
+                </div>
+               
+            </form>
+            <div class="create-account">
+                <p>Don't have an account?<button id="signup" onclick="signUp()">Signup</button></p>
+            </div>
+        </div>
+        <!-- signup -->
+        <div class="signin-form" style="display: none">
+            <div class="signin-logo"><img id="signin-logo-design" src="{% static 'logo.png' %}" height="60px"  width="150px" ></div>
+            <div class="header-text">Join <span style="color: #f97007">MLCodeVerse</span> </div><br>
+            <form action="{% url 'register' %}" method="post" id="signup-form">
+                {% csrf_token %}
+                <div class="signin-form-design">
+                    <input type="text" name="name" placeholder="Your Name" class="input-design-signin signup-input" required>
+                    <img  style="z-index: 1" class="login-side-icon" src="{% static 'username.png' %}">
+                </div>
+    
+                <div class="signin-form-design">
+                    <input type="email" name="user_mail" placeholder="Email Address" class="input-design-signin signup-input" required>
+                    <img  style="z-index: 1" class="login-side-icon" src="{% static 'new-mail.png' %}">
+                </div>
+                <div class="signin-form-design">
+                    <input type="password" name="password" id="passwordView-signup" placeholder="Password" class="input-design-signin signup-input" required>
+                    <img style="z-index: 1" class="login-side-icon" id="view-pass-signup" onclick="View_Pass_Signup()" src="{% static 'pass-view.png' %}">
+                    <img style="z-index: 1" class="login-side-icon" id="hide-pass-signup" onclick="Hide_Pass_Signup()" src="{% static 'hide-new.png' %}">
+                </div>
+               
+                <div class="signin-form-design">
+                   <button  type="submit" class="button-design-signin" id="sign-up">Signup</button>
+                </div>   
+            </form>
+            <div class="create-account">
+                <p>Already have an account?<button id="signup" onclick="signIn()">Signin</button></p>
+            </div>
+        </div>
+        <div class="loader">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+    </div>
+
+    <script>
+        var view_pass = document.getElementById("view-pass");
+        var hide_pass = document.getElementById("hide-pass");
+        var password = document.getElementById("passwordView");
+
+        var view_pass_signup = document.getElementById("view-pass-signup");
+        var hide_pass_signup = document.getElementById("hide-pass-signup");
+        var password_signup = document.getElementById("passwordView-signup");
+
+        var signup_signin = document.querySelectorAll(".signin-form");
+
+        var accountType = document.getElementById("accountType");
+        var submitButton = document.getElementById("submit-btn");
+ 
+        
+        function View_Pass(){
+            hide_pass.style.display = "Block";
+            view_pass.style.display = "None";
+            password.type = "text";
+        }
+        function Hide_Pass(){
+            view_pass.style.display = "Block";
+            hide_pass.style.display = "None";
+            password.type = "password"
+        }
+        function View_Pass_Signup(){
+            hide_pass_signup.style.display = "Block";
+            view_pass_signup.style.display = "None";
+            password_signup.type = "text";
+        }
+        function Hide_Pass_Signup(){
+            view_pass_signup.style.display = "Block";
+            hide_pass_signup.style.display = "None";
+            password_signup.type = "password"
+        }
+        function signUp(){
+            signup_signin[0].style.display="none";
+            signup_signin[1].style.display="block";
+        }
+        function signIn(){
+            signup_signin[0].style.display="block";
+            signup_signin[1].style.display="none";
+        }
+
+        const signUpId = document.getElementById("sign-up");
+        const loader = document.querySelector(".loader");
+
+        const signUpFormId = document.getElementById("signup-form");
+        const signupInput = document.querySelectorAll(".signup-input");
+        signUpId.addEventListener("click", ()=>{
+           
+           if(signupInput[0].value.length == 0 || signupInput[1].value.length == 0 || signupInput[2].value.length == 0 ){
+            alert("Fill The Required Input Field");
+
+           }
+           else{
+            signup_signin[0].style.display = "none";
+            signup_signin[1].style.display = "none";
+            loader.style.display="flex";
+            signUpFormId.submit();
+           }
+
+  
+        });
+        const inputSignIn = document.querySelectorAll(".input-design-signin");
+
+        submitButton.addEventListener("click", ()=>{
+            if(inputSignIn[0].value.length == 0 || inputSignIn[1].value.length == 0){
+                
+                alert("Fill The Required Input Field");
+    
+            }
+           else {
+                signup_signin[0].style.display = "none";
+                signup_signin[1].style.display = "none";
+                loader.style.display="flex";
+            }
+
+         });
+        
+    </script>
+  
+
+</body>
+</html>

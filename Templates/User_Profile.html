@@ -1,0 +1,640 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="icon" type="image/png" href="{% static 'title-logo.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+   
+    <style>
+        body{
+            margin: 0;
+            background-color: #F8FAFC;
+        }
+        .Container{
+          width: 100%;
+          background-color: #F8FAFC;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: flex-start;
+     
+          
+        }
+        #navbar{
+            width: 100%;
+            background-color: #F8FAFC;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        #nav-area{
+            width: 80%;
+            align-items: center;
+            margin: 0 auto;
+            font-size: 17px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            display: flex;
+            flex-wrap: wrap;
+            letter-spacing: 0.5px; 
+            font-weight: 600; 
+            padding: 0 10px;
+        }
+        .logo{
+            width: 130px;
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right: 40px;
+           
+        }
+   
+        .nav-elements {
+            margin: 5px 25px 5px 0px;
+            font-weight: lighter;
+            position: relative;
+            padding-bottom: 5px; 
+            background: none;
+            border: none;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 17px;
+        }
+
+        
+        .nav-elements::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #0787EE;
+            transition: width 0.3s ease-in-out; 
+        }
+        .active-link{
+            color:#0787EE;
+        }
+        
+        .nav-elements:hover::after {
+            width: 100%; 
+        }
+
+  
+        .search-section{
+            position: absolute;
+            right: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-design {
+            float: right;
+            font-size: 15px;
+            padding: 10px;
+            outline: none; 
+            border: none;
+            width: 200px;
+            transition: 1s;
+        }
+    
+        .input-design:focus {
+            border-color: dodgerblue; 
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5); 
+            width: 360px;
+        }
+        .profile-btn{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            padding: 0px;
+            background: none;
+            border: none;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d; 
+        }
+        .profile-btn:hover {
+            transform: rotateY(180deg); /* Rotate around the Y-axis */
+        }
+        .logout-btn{
+            width: 30px;
+            background: none;
+            border: none;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            gap: 5px; 
+            font-family: Poppins;
+            color: #0787EE;
+            overflow: hidden;
+            transition: width 1s ease-in-out;
+        }
+        .logout-btn:hover{
+            width: 100px;
+        }
+        .border-design{
+            width: 100%;
+            height: 1px;
+            background-color: rgb(214, 203, 203);
+        }
+        .body-container{
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            font-size: .875rem;;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            color: #2f353b;
+            letter-spacing: 0.5px; 
+            font-weight: 500;
+            padding: 0 10px;
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            align-items: flex-start;
+            box-sizing: border-box;
+
+            border-radius: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          
+        }
+        .body-container-left{
+            width: 72.3%;
+            margin-right: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-sizing: border-box;
+            animation: fadeLeftRight 1s ease-in-out;
+        
+
+        }
+        @keyframes fadeLeftRight {
+            0% {
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        .body-container-left-elements{
+            width: 30%;
+            flex-grow: 1;
+            height: 120px;
+            border-radius: 5px;
+            border: 1px solid #0787EE;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .left-elements-logo{
+            width: 100px;
+            height: 85px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .text{
+            width: calc(100% - 100px);
+            height: 85px;
+            text-align: right;
+            font-size: 15px;
+            font-family: sans-serif;
+            padding: 10px;
+            box-sizing: border-box;
+            font-weight: 500;
+
+        }
+        .down-border{
+            width: 100%;
+            height: 35px;
+            background-color: #0787EE;
+        }
+        .category-wise-contest{
+            width: 100%;
+            border: 1px solid #0787EE;
+            box-shadow: 0px 0px 1px 1px white;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .category-wised-contest-elements{
+            width: 50%;
+         
+            box-sizing: border-box;
+        }
+        table {
+            width: 49.5%;
+            border-collapse: collapse;
+            box-sizing: border-box;
+            border-radius: 5px;
+            overflow: hidden;
+
+        }
+        
+  
+        
+        th, td {
+            padding: 15px;
+            padding-left: 20px;
+            text-align: center;
+            font-size: 15px;
+            font-family: "Poppins";
+            font-weight: 400;
+            font-style: normal;
+            
+           
+        }
+        thead {
+          background-color: #f5f5f5; 
+          position: sticky; 
+          top: 0; 
+          z-index: 10;
+        }
+        
+        th {
+            background-color: #0787EE;
+            color: white;
+           
+        }
+
+        tr:nth-child(odd) {
+            background-color: #f3f3f3;
+        }
+        tr:hover {
+            background-color: rgb(213, 233, 241);
+            color: black;
+            margin: 10px;
+        }
+        .body-container-right{
+            width: 26%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-sizing: border-box;
+            animation: fadeRightLeft 1s ease-in-out;
+ 
+        }
+        @keyframes fadeRightLeft {
+            0% {
+                opacity: 0; 
+                transform: translateX(50px); 
+            }
+            100% {
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+        .profile-section{
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #0787EE;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        }
+        .edit-info-icon{
+            width: 100%;
+            
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding: 10px 10px 0px 0px;
+        }
+        .edit-section{
+            width: 100%;
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+        }
+        .edit-info{
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 10px;
+        }
+        .edit-info-input{
+            border: none;
+            outline: none;
+            width: 50%;
+            border-bottom: 2px solid skyblue;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 16px;
+            background-color: transparent;
+        }
+        .edit-info-btn{
+            background-color: #3598DC;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+        .profile-text{
+            width: 100%;
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-family: sans-serif;
+
+        }
+        .upcoming-contest{
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #0787EE;
+            margin-top: 10px;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+        }
+      
+
+
+    </style>
+</head>
+<body>
+    <div class="Container">
+        <div id="navbar">
+
+            <div id="nav-area">
+                <div class="logo">
+                    <a href="{% url 'Landing_Page' %}"><img height="60px"  width="150px"  src="{% static 'logo.png' %}"></a>
+                </div>
+                <button class="nav-elements">Contest</button>
+                <button class="nav-elements">Practice</button>
+                <button class="nav-elements">Leaderboard</button>
+                <button class="nav-elements">Tutorials</button>
+                <button class="nav-elements">About Us</button>
+            <div class="search-section">
+                <form style="display: flex">
+                    <input class="input-design" type="search" placeholder="Contest Id">
+                    <button style="border: none; background-color: transparent"><img height="25px" width="25px" style="margin-left: -45px; margin-top: 5px" src="{% static 'search.png' %}"></button>
+                </form>
+            
+                <form action="{% url 'profile' %}">
+                    {%if pic is not none%}
+                    <button class="profile-btn"> <img src="data:image/png;base64,{{ pic }}" height="40px" width="40px" style="border-radius: 50%" ></button>
+                    {% else %}
+                    <button class="profile-btn"> <img src="{% static 'profile.png' %}" height="40px" width="40px"  ></button>
+                    {% endif %}
+                </form>
+                <form action="{% url 'logout' %}">
+                    <button class="logout-btn"> <span style="font-size: 35px;  font-weight: 400"></span> <img src="{% static 'log-out.png' %}" height="20px" width="20px"> Logout</button>
+                </form>
+              
+            </div>
+           
+            </div>    
+        </div>
+        
+        <div class="body-container">
+            <div class="body-container-left">
+
+                <div class="body-container-left-elements">
+                    <div class="left-elements-logo"><img src="{% static  'ml.png' %}" height="64px" width="64px"></div>
+                    <div class="text">
+                        <div style="font-size: 24px"><b>3</b></div>
+                        <div>Machine Learning Contest</div>
+                    </div>
+                    <div class="down-border"></div>
+                </div>
+                <div class="body-container-left-elements">
+                    <div class="left-elements-logo"><img src="{% static  'software.png' %}" height="64px" width="64px"></div>
+                    <div class="text">
+                        <div style="font-size: 24px"><b>5</b></div>
+                        <div>C/C++ Contest</div>
+                    </div>
+                    <div class="down-border"></div>
+                </div>
+                <div class="body-container-left-elements">
+                    <div class="left-elements-logo"><img src="{% static  'problem-solving.png' %}" height="64px" width="64px"></div>
+                    <div class="text">
+                        <div style="font-size: 24px"><b>10/58</b></div>
+                        <div>Problems Solved</div>
+                    </div>
+        
+                    <div class="down-border"></div>
+                </div>
+                <div class="category-wise-contest">
+                    <div style="width: 100%; font-family: Poppins; font-weight: 600">Category Wised Contest</div>
+                    <div style="width: 100%; font-family: Poppins; display: flex; font-weight: 600"><div style="width: 50%">ML Contest</div><div style="width: 50%">C/C++ Contest</div></div>
+                        
+                
+                            <table  class="category-wise-contest-elements">
+                               
+                                    <tr>
+                                        <th>Contest Title</th>
+                                        <th>Date</th>
+                                        <th>Accuracy</th>
+                                        <th>Action</th>
+                                    
+                                    </tr>
+
+                                {% for contest in contests %}
+                        
+                                <tr class="contest-data">
+                                 <td>{{contest.title}}</td>
+                                 <td>{{contest.date}}</td>
+                                 {% if contest.accuracy == '0'%}
+                                 <td>Not Taken</td>
+                                 {% else %}
+                                 <td>{{contest.accuracy}}</td>
+                                 {% endif %}
+                                 <form action="{% url 'ml_contest_home' %}" method="GET">
+                                  
+                                    <input type="hidden" name="contestId" value={{contest.id}}>
+                                   
+                                    
+                                    <td>
+                                        <button type="submit" style="background: none; border: none">
+                                            <img height="20px" width="20px" src="{% static 'pass-view.png'%}">
+                                        </button>
+                                    </td>
+                                 </form>
+                                
+                                </tr>
+                               {% endfor %}
+                  
+                            </table>
+                       
+                   
+                   
+                      
+                            <table class="category-wise-contest-elements">
+                             
+                                    <tr>
+                                        <th>Contest Title</th>
+                                        <th>Date</th>
+                                        <th>Rank</th>
+                                        <th>Action</th>
+                                    
+                                    </tr>
+          
+                                {% for contest in programming %}
+                        
+                               <tr class="contest-data">
+                                <td>{{contest.title}}</td>
+                                <td>{{contest.date}}</td>
+                                <td>Pending</td>
+                                <form action="{% url 'programming_contest_home' %}" method="GET">
+                                  
+                                    <input type="hidden" name="contestId" value={{contest.id}}>
+                                   
+                                    
+                                    <td>
+                                        <button type="submit" style="background: none; border: none">
+                                            <img height="20px" width="20px" src="{% static 'pass-view.png'%}">
+                                        </button>
+                                    </td>
+                                 </form>
+                                </tr>
+                               {% endfor %}
+                  
+                            </table>
+                       
+                  
+                </div>
+            </div>
+            <div class="body-container-right">
+              <div class="profile-section">
+                <div class="edit-info-icon"><img class="edit-controll" src="{% static 'edit-file.png' %}"></div>
+                <div class="edit-info-icon"><img class="edit-controll" src="{% static 'cancel.png' %}"></div>
+                <img src="data:image/png;base64,{{ image }}" id="proflie-img" height="300px" width="300px" style="border-radius: 10px; border: 1px solid black">
+                <div>
+                    <div class="profile-text"><img src="{% static 'name.png' %}"><div>{{username}}</div></div>
+                    <div class="profile-text"><img src="{% static 'email.png' %}"><div>{{userId}}</div></div>
+                    <div class="profile-text"><img src="{% static 'university.png' %}"><div>{{university}}</div></div>
+                </div>
+                <div class="edit-section">
+                    <form class="edit-info" action="{% url 'editUserInfo' %}" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                        <img src="{% static 'profile-pic.png' %}">
+                        <input type="file" name="image" class="edit-info-input" accept="image/*">
+                        <input type="hidden" name="email" value={{userId}}>
+                        <button type="submit" class="edit-info-btn">Save</button>
+
+                    </form>
+                    <form class="edit-info"  action="{% url 'editUserInfo' %}" method="POST">
+                        {% csrf_token %}
+                        <img src="{% static 'name.png' %}">
+                        <input type="text" name="name" class="edit-info-input"> 
+                        <button type="submit" class="edit-info-btn">Save</button>
+
+                    </form>
+                    <form class="edit-info" action="{% url 'editUserInfo' %}" method="POST">
+                        {% csrf_token %}
+                        <img src="{% static 'university.png' %}">
+                        <input type="text" name="university" class="edit-info-input"> 
+                        <button type="submit" class="edit-info-btn">Save</button>
+
+                    </form>
+                     
+                </div>
+
+              </div>
+
+              <div class="upcoming-contest">
+                <p>Upcoming Contest</p>
+                <table style="width: 100%">
+     
+  
+                    <tr>
+                        <th>Contest Title</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                {% for contest in contests %}
+        
+                <tr class="contest-data">
+                 <td>{{contest.title}}</td>
+                 <td>{{contest.date}}</td>
+                 <td><img height="20px" width="20px" src="{% static 'pass-view.png'%}"></td>
+                 </tr>
+
+               {% endfor %}
+      
+                </table>
+           
+              </div>
+        </div>
+
+     <script>
+        const editInfoIcon = document.querySelectorAll(".edit-controll");
+        const editInfo = document.querySelectorAll(".edit-info");
+        const editInfoInput = document.querySelectorAll(".edit-info-input");
+        const profileImg = document.getElementById("proflie-img");
+        const profileText = document.querySelectorAll(".profile-text");
+
+        editInfo[0].style.display="none";
+        editInfo[1].style.display="none";
+        editInfo[2].style.display="none";
+        editInfoIcon[1].style.display="none";
+
+        editInfoIcon[0].addEventListener("click",()=>{
+            profileImg.style.display="none";
+            profileText[0].style.display="none";
+            profileText[1].style.display="none";
+            profileText[2].style.display="none";
+            editInfo[0].style.display="block";
+            editInfo[1].style.display="block";
+            editInfo[2].style.display="block";
+ 
+
+            editInfoInput[1].value=profileText[0].textContent;
+            editInfoInput[2].value=profileText[2].textContent;
+            console.log(profileText[0].textContent);
+            editInfoIcon[0].style.display="none";
+            editInfoIcon[1].style.display="block";
+        });
+        editInfoIcon[1].addEventListener("click",()=>{
+            profileImg.style.display="block";
+            profileText[0].style.display="flex";
+            profileText[1].style.display="flex";
+            profileText[2].style.display="flex";
+
+            editInfo[0].style.display="none";
+            editInfo[1].style.display="none";
+            editInfo[2].style.display="none";
+  
+
+            editInfoIcon[1].style.display="none";
+            editInfoIcon[0].style.display="block";
+        });
+
+
+     </script>
+    </div>
+   
+</body>
+</html>
